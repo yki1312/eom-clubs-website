@@ -1,0 +1,24 @@
+.nav-bar {
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.clr-float {
+  clear: both;
+}
+.flex-container-h {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin: 40px;
+}
+.flex-container-v {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  margin: 40px;
+}
