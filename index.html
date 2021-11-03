@@ -9,32 +9,68 @@
 
     <body>
         <header>
-            <p>Banner+Logo</p>
+            <center><i><h1 style="border:5px solid SlateBlue;"> Welcome to EOM Clubs!</h1></center></i>
         </header> 
-        <nav> 
-            <ul>
-                <li>
-                    <a href="index.html">Clubs</a>
-                    <ul>
-                        <li><a href="clubPages/exampleSubpage.html">Example Club</a></li>
-                    </ul>
-                </li>
-                <li><a href="suggestions.html">Suggestions Page</a></li>
-                <li><a href="aboutEoM.html">EOM Clubs Page</a></li>
-                <li>
-                    <a href="login.html">Login</a>
-                    <ul>
-                        <li><a href="userPages/profile.html">Your Profile</a></li>
-                        <li><a href="userPages/userList.html">User List</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        
+         
+        <ul>
+            <li class="dropdown">
+                <a href="index.html" class="dropbtn">Clubs</a>
+                <div class="dropdown-content">
+                    <a href="clubPages/exampleSubpage.html">First Club</a>
+                    <a href="#">Second Club</a>
+                    <a href="#">Third Club</a>
+                </div>
+            </li>
+            <li><a href="suggestions.html">Suggestions Page</a></li>
+            <li><a href="aboutEoM.html">EOM Clubs Page</a></li>
+            <li class="dropdown">
+                <a href="login.html" class="dropbtn">Login</a>
+                <div class="dropdown-content">
+                    <a href="userPages/profile.html">Your Profile</a>
+                    <a href="userPages/userList.html">User List</a>
+                </div>
+            </li>
+        </ul>        
+        
+        
+        <br>
+        <h2>The list Of Different Clubs:</h2>
+
+        <!--Need to add border around the club links using CSS.-->
+        <ol class="four">
+            <li>First Club</li> <br>
+            <li>Second Club</li> <br>
+            <li>Third Club</li> <br>
+            <li>Fourth Club</li> <br>
+            <li>Fifth Club</li> <br>
+        </ol>
+
+
+
+        <!-- Created a search and add a club button. NEED TO USE CSS!!-->
+        <div class="w3-container">
+            <!--<input type="button" class="w3-button w3-black" value="Search..."> -->
+            <button class="w3-button w3-black">Add a club +</button>
+        </div>
+        <br>
+        <br>
+
+
+        <!--Create a search using CSS.-->
+        <form>
+            <input type="text" name="search" placeholder="Search...">
+        </form>
+        <br>
+
+
+        <!-- Created a date and time display to be output to the screen. NEEDS TO USE CSS.-->
+        <p id="demo"></p>
+        <button type="button" onclick="document.getElementById('demo').innerHTML = Date()"> Click me to display Date and Time.</button> 
+        
+          
 
 
     </body>
-
-
-
 
 </html>
