@@ -46,20 +46,26 @@
                         Description
                     </textarea>
                 </div>
-                <h2>Photo gallery</h2>
+                <div>
+                    <label for="clubPhoto">Upload Images</label>
+                    <input name="clubPhoto" type="file">
+                </div>
             </div>
             <div class="flex-container-h">
                 <h2>Suggestions</h2>
                 <div class="flex-container-v">
                     <h2>Member List</h2>
-                    <ol>
+                    <ol class="flex-container-v">
                         <li>member 1</li>
-                        <li><input name="newMember" type="text"></li>
+                        <li><button type="button">Add new member</button></li>
+<!--                        <li><input name="newMember" type="text"></li>
+-->
                     </ol>
                 </div>
             </div>
             <div>
-                <a href="exampleSubpage.html"><button type="submit">Submit</button></a>
+                <button type="submit">Save Changes</button>
+                <a href="exampleSubpage.html"><button type="button">temp button to view only example subpage</button></a>
             </div>
         </form>
     </section>
