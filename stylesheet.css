@@ -167,3 +167,8 @@ input[type="text"] {
 nav {
   position: sticky;
 }
+
+/* Styling the table for the user list*/
+table, th, td {
+  border: 1px solid black;
+}
