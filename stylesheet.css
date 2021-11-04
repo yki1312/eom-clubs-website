@@ -30,15 +30,22 @@ p {
   color: brown;
 }
 
+.bannerText {
+  font-family: "Times New Roman", Times, serif;
+  color: yellow;
+  font-size: 50px;
+  background-color: MediumSeaGreen;
+}
+
 h1 {
   font-family: "Times New Roman", Times, serif;
-  color: orange;
+  color: black;
   font-size: 50px;
 }
 
 h2 {
   font-family: sans-serif;
-  color: red;
+  color: black;
 }
 
 /* Styling the dropdown for the main page: */
@@ -53,7 +60,7 @@ li a,
 
 li a:hover,
 .dropdown:hover .dropbtn {
-  background-color: red;
+  background-color: mediumseagreen;
 }
 
 li.dropdown {
@@ -63,7 +70,7 @@ li.dropdown {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: black;
+  background-color: seagreen;
   min-width: 160px;
   padding: 12px 16px;
   z-index: 1;
@@ -78,7 +85,10 @@ li.dropdown {
 }
 
 .dropdown-content a:hover {
-  background-color: #acb434;
+  background-color: mediumseagreen;
+  /*
+  #acb434
+  */
 }
 
 .dropdown:hover .dropdown-content {
@@ -115,7 +125,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: grey;
+  background-color: LightSlateGray;
 }
 
 li {
