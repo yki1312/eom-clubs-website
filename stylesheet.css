@@ -23,29 +23,34 @@
   margin: 40px;
 }
 
- /* Styling the text display for the main page. */
- p{
-  font-family: 'Times New Roman', Times, serif;
+/* Styling the text display for the main page. */
+p {
+  font-family: "Times New Roman", Times, serif;
   font-size: medium;
   color: brown;
 }
 
-h1{
-  font-family: 'Times New Roman', Times, serif;
-  color: orange;
+.bannerText {
+  font-family: "Times New Roman", Times, serif;
+  color: yellow;
+  font-size: 50px;
+  background-color: MediumSeaGreen;
+}
+
+h1 {
+  font-family: "Times New Roman", Times, serif;
+  color: black;
   font-size: 50px;
 }
 
-h2{
+h2 {
   font-family: sans-serif;
-  color: red;
+  color: black;
 }
 
-
-
-
 /* Styling the dropdown for the main page: */
-li a, .dropbtn {
+li a,
+.dropbtn {
   display: inline-block;
   color: white;
   text-align: center;
@@ -53,19 +58,19 @@ li a, .dropbtn {
   text-decoration: none;
 }
 
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+li a:hover,
+.dropdown:hover .dropbtn {
+  background-color: mediumseagreen;
 }
 
 li.dropdown {
   display: inline-block;
 }
 
-
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: black;
+  background-color: seagreen;
   min-width: 160px;
   padding: 12px 16px;
   z-index: 1;
@@ -79,12 +84,16 @@ li.dropdown {
   text-align: left;
 }
 
-.dropdown-content a:hover {background-color: #acb434}
+.dropdown-content a:hover {
+  background-color: mediumseagreen;
+  /*
+  #acb434
+  */
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 
 /*.dropbtn {
   background-color: #4CAF50;
@@ -95,7 +104,6 @@ li.dropdown {
   cursor: pointer;
 }
 */
-
 
 /*.dropdown:hover .dropbtn {
   background-color: #3e8e41;
@@ -111,34 +119,27 @@ li.dropdown {
 }
 */
 
-
-
-
-
-
 /* Styling the navigation bar */
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: grey;
+  background-color: LightSlateGray;
 }
 
 li {
   float: left;
 }
 
-li a, .dropbtn {
+li a,
+.dropbtn {
   display: block;
   color: whitesmoke;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
-
-
-
 
 /* Styling the club list so that it shows in a better way. */
 
@@ -150,16 +151,19 @@ ol.four {
 }
 
 /* Styling the search function.*/
-input[type=text] {
+input[type="text"] {
   width: 100%;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   background-color: white;
-  background-image: url('searchicon.png');
-  background-position: 10px 10px; 
+  background-image: url("searchicon.png");
+  background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
 }
 
+nav {
+  position: sticky;
+}
