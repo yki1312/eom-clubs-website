@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <title>EoM Clubs Website - Invitation Code Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="../stylesheet.css">
+
+    </head>
+
+    <body>
+        <header>
+            <center><i><h1 class="bannerText">Welcome to EOM Clubs!</h1></center></i>
+        </header> 
+        
+         
+        <ul>
+            <li class="dropdown">
+                <a href="../index.html" class="dropbtn">Clubs</a>
+                <div class="dropdown-content">
+                    <a href="../clubPages/exampleSubpage.html">First Club</a>
+                    <a href="#">Second Club</a>
+                    <a href="#">Third Club</a>
+                </div>
+            </li>
+            <li><a href="../suggestions.html">Suggestions Page</a></li>
+            <li><a href="../aboutEoM.html">EOM Clubs Page</a></li>
+            <li class="dropdown">
+                <a href="../userSystem/login.html" class="dropbtn">Login</a>
+                <div class="dropdown-content">
+                    <a href="profile.html">Your Profile</a>
+                    <a href="userList.html">User List</a>
+                </div>
+            </li>
+        </ul>
+        <br>
+
+        <h2>Create Invitation Code Page</h2>
+        <br>
+
+        <!-- Need to create a text-box-->
+        <p>Do you want to create a teacher or student account?</p>
+        <form>
+            <input type="radio" id="student" name="acc_ty" value="Student">
+            <label for="student">Student</label><br>
+            <input type="radio" id="teacher" name="acc_ty" value="Teacher">
+            <label for="teacher">Teacher</label><br>
+        </form>
+
+        <br>
+        <!--Now need to create a button which would output a random number: Using Js-->
+
+        <button type="button" onclick="randomFunction()">Generate Invitation Code</button>
+        <p id="demo"></p>
+
+        <script>
+            function randomFunction() {
+                let x = Math.floor((Math.random() * 100000) + 10000);
+                document.getElementById("demo").innerHTML = x;
+            }
+        </script>
+
+        <!--Used to display the information inputed:-->
+        <form>
+            <textarea name="message" rows="4" cols="30">The invitation code is ___ </textarea>
+            <br><br>
+            <textarea name="message" rows="4" cols="30">The type of account is ___ </textarea>
+        </form>
+
+
+        <p>A newly created invitation code is valid for 24 hours and has a one time use.</p>
+        <p>Teacher accounts will be able to create invitation codes and delete user accounts.</p>
+
+
+
+    </body>
+</html>
