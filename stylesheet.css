@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  border: 1px solid black;
+  border: 0px solid black;
   margin: 20px;
 }
 
