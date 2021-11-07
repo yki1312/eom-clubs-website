@@ -40,26 +40,26 @@
 
         <br>
         <br>
-        <table>
+        <table id="userTable">
             <tr>
               <th>Number of Users</th>
               <th width="70%">User Email</th>
-              <th>Delete User (Y/N)</th>
+              <th>Delete User</th>
             </tr>
             <tr>
               <td>1</td>
               <td>maria.anders@gmail.com</td>
-              <td>Y</td>
+              <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
             </tr>
             <tr>
               <td>2</td>
               <td>francisco.chang@gmail.com</td>
-              <td>N</td>
+              <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
             </tr>
             <tr>
                 <td>3</td>
                 <td>roland.mendel@gmail.com</td>
-                <td>Y</td>
+                <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
               </tr>
         </table>
 
@@ -68,9 +68,17 @@
         <br>
         <form>
             <input type="text" name="search" placeholder="Search user...">
-            <a href="invitationCode.html">Create new Invitation Code</a>
+            <a href="invitationCode.html"><input type="button" value="Invitation Code Page"></a>
         </form>
         <br>
+
+        <!--To delete rows in a table using Html-->
+        <script>
+            function deleteRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("userTable").deleteRow(i);
+            }
+        </script>
 
 
 

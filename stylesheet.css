@@ -151,11 +151,29 @@ input[type="text"] {
   border: 2px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  background-color: white;
+  background-color: whitesmoke;
   background-image: url("searchicon.png");
   background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
+}
+
+.search{
+  position: absolute;
+  border: 1px solid red;
+  top: 20px;
+  right: 15px;
+}
+
+.addClub{
+  position: absolute;
+  border: 1px solid red;
+  top: 250px;
+  right: 900px
+}
+
+.earlFooter{
+  padding: 40px;
 }
 
 nav {
@@ -163,8 +181,6 @@ nav {
 }
 
 /* Styling the table for the user list*/
-table,
-th,
-td {
+table, th, td {
   border: 1px solid black;
 }
