@@ -2,7 +2,7 @@
 p {
   font-family: "Times New Roman", Times, serif;
   font-size: medium;
-  color: brown;
+  color: black;
 }
 
 .bannerText {
@@ -21,7 +21,7 @@ h1 {
 }
 
 h2 {
-  font-family: sans-serif;
+  font-family: "Times New Roman", Times, serif;
   color: black;
 }
 
@@ -203,7 +203,7 @@ hr.rounded {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 10px;
   }
   .club-basic-info {
@@ -221,7 +221,7 @@ hr.rounded {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 10px;
 }
 .flex-container-h-nmq {
@@ -229,7 +229,7 @@ hr.rounded {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 10px;
 }
 .login-button {
@@ -240,4 +240,12 @@ hr.rounded {
 }
 #club-edit-button {
   flex: 1;
+}
+
+/* Club user page label */
+.club-label {
+  font-family: "Times New Roman", Times, serif;
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
 }
