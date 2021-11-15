@@ -173,7 +173,13 @@ input[type="text"] {
 }
 
 .earlFooter{
-  padding: 40px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(114, 111, 111);
+  color: white;
+  text-align: left;
 }
 
 nav {
@@ -183,4 +189,10 @@ nav {
 /* Styling the table for the user list*/
 table, th, td {
   border: 1px solid black;
+}
+
+/* Rounded border for dividers in suggestions */
+hr.rounded {
+  border-top: 8px solid #bbb;
+  border-radius: 5px;
 }
