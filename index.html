@@ -11,7 +11,6 @@
         <header style="background-color: MediumSeaGreen">
             <img src=Logos/finalDesigns/Logo_3.jpg alt="Logo" width="200px">
             <i><h1 class="bannerText"> Welcome to EOM Clubs!</h1></i>
-            <!-- border:5px solid MediumSpringGreen; -->
         </header> 
       
          
@@ -37,23 +36,20 @@
         
         
         <br>
-        <h2>The list Of Different Clubs:</h2>
+        <h2>Clubs:</h2>
 
 
-        <!--Need to add border around the club links using CSS.-->
-        <ol class="four">
-            <li>First Club</li> <br>
-            <li>Second Club</li> <br>
-            <li>Third Club</li> <br>
-            <li>Fourth Club</li> <br>
-            <li>Fifth Club</li> <br>
+        <!--The list of the different clubs.-->
+        <ol class="four" id="myUL">
+            <li><a href="clubPages/exampleSubpage.html">First Club</a></li> <br>
+            <li><a href="clubPages/exampleSubpage.html">Second Club</a></li> <br>
+            <li><a href="clubPages/exampleSubpage.html">Third Club</a></li> <br>
+            <li><a href="clubPages/exampleSubpage.html">Fourth Club</a></li> <br>
+            <li><a href="clubPages/exampleSubpage.html">Fifth Club</a></li> <br>
         </ol>
 
 
-
-        <!-- Created a search and add a club button. NEED TO USE CSS!!-->
         <div class="addClub">
-            <!--<button class="w3-button w3-black">Add a club +</button>-->
             <a href="clubPages/exampleSubpageUser.html"><input type="button" value="Add a club +"></a>
         </div>
         <br>
@@ -62,24 +58,55 @@
 
         <!--Create a search using CSS.-->
         <form class="search">
-            <input type="text" name="search" placeholder="Search...">
+            <input type="text" name="search" onkeyup="myFunction()" id="myInput" placeholder="Search...">
         </form>
         <br>
 
+        <script>
+            function myFunction() {
+                var input, filter, ul, li, a, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("myUL");
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    a = li[i].getElementsByTagName("a")[0];
+                    txtValue = a.textContent || a.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
 
-        <!-- Created a date and time display to be output to the screen. NEEDS TO USE CSS.-->
-        <p id="demo"></p>
-        <button type="button" onclick="document.getElementById('demo').innerHTML = Date()"> Display Date and Time.</button> 
 
+        <!-- Created a date display to be output to the screen.-->
+        <p id="demo" style="border:5px solid rgb(226, 132, 94)" class="date"></p>
+        <script>
+            const d = new Date();
+            document.getElementById("demo").innerHTML = d.toDateString();
+        </script>
+
+        <br>
+        <br>
+        <br>    
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <br>
         <br>
         <br>
         <hr>
+        <br>
 
         <footer class="earlFooter">
             <h3>EARL OF MARCH SS</h3>
-            <address>
-                4 The Parkway, Kanata, ON K2K 1Y4
+            <address style="padding: 15px;">
+                4 The Parkway, Kanata, ON K2K 1Y4, <br>
                 Phone (613) 592-3361 | Fax (613) 592-9501
             </address>
             <a href="mailto:earlofmarchss@ocdsb.ca">Email: earlofmarchss@ocdsb.ca</a>
