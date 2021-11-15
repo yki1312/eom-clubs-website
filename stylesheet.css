@@ -1,48 +1,3 @@
-@media (min-width: 768px) {
-  .flex-container-h {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    border: 1px solid black;
-    margin: 10px;
-  }
-  .club-basic-info {
-    flex: 1;
-  }
-  .club-suggestions {
-    flex: 2;
-  }
-  .club-member-list {
-    flex: 1;
-  }
-}
-.flex-container-v {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  border: 1px solid black;
-  margin: 10px;
-}
-.flex-container-h-nmq {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  border: 1px solid black;
-  margin: 10px;
-}
-.login-button {
-  flex-basis: 50%;
-}
-#club-title {
-  flex: 4;
-}
-#club-edit-button {
-  flex: 1;
-}
-
 /* Styling the text display for the main page. */
 p {
   font-family: "Times New Roman", Times, serif;
@@ -117,7 +72,6 @@ li.dropdown {
   display: block;
 }
 
-
 /* Styling the navigation bar */
 ul {
   list-style-type: none;
@@ -167,10 +121,6 @@ input[type="text"] {
   top: 20px;
   right: 15px;
 }
-
-<<<<<<< HEAD
-.addClub {
-=======
 #myUL {
   list-style-type: none;
   padding: 0;
@@ -179,26 +129,20 @@ input[type="text"] {
 
 #myUL li a {
   border: 1px solid #ddd;
-  margin-top: -1px; 
+  margin-top: -1px;
   background-color: #f6f6f6;
   padding: 12px;
   text-decoration: none;
   font-size: 18px;
   color: black;
-  display: block
+  display: block;
 }
 
-
-.addClub{
->>>>>>> 838186bf7511a973d3a08edd9e4ff4968e423c56
+.addClub {
   position: absolute;
   top: 250px;
-<<<<<<< HEAD
-  right: 900px;
-=======
   right: 700px;
   padding: 15px;
->>>>>>> 838186bf7511a973d3a08edd9e4ff4968e423c56
 }
 
 .earlFooter {
@@ -215,9 +159,9 @@ nav {
   position: sticky;
 }
 
-.date{
+.date {
   position: absolute;
-  color:black;
+  color: black;
   top: 70px;
   right: 90px;
 }
@@ -235,7 +179,7 @@ hr.rounded {
   border-radius: 5px;
 }
 
-#textClub{
+#textClub {
   width: 70%;
   height: 150px;
   padding: 12px 20px;
@@ -246,8 +190,54 @@ hr.rounded {
   resize: none;
 }
 
-.userSearch{
+.userSearch {
   position: absolute;
   top: 250px;
   right: 400px;
+}
+
+/* Flexbox */
+@media (min-width: 768px) {
+  .flex-container-h {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid black;
+    margin: 10px;
+  }
+  .club-basic-info {
+    flex: 1;
+  }
+  .club-suggestions {
+    flex: 2;
+  }
+  .club-member-list {
+    flex: 1;
+  }
+}
+.flex-container-v {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  margin: 10px;
+}
+.flex-container-h-nmq {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin: 10px;
+}
+.login-button {
+  flex-basis: 50%;
+}
+#club-title {
+  flex: 4;
+}
+#club-edit-button {
+  flex: 1;
 }
