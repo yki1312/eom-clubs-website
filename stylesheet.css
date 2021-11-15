@@ -1,18 +1,46 @@
-.clr-float {
-  clear: both;
-}
-.flex-container-h {
-  display: flex;
-  justify-content: space-between;
-  border: 0px solid black;
-  margin: 20px;
+@media (min-width: 768px) {
+  .flex-container-h {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid black;
+    margin: 10px;
+  }
+  .club-basic-info {
+    flex: 1;
+  }
+  .club-suggestions {
+    flex: 2;
+  }
+  .club-member-list {
+    flex: 1;
+  }
 }
 .flex-container-v {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  border: 0px solid black;
-  margin: 20px;
+  border: 1px solid black;
+  margin: 10px;
+}
+.flex-container-h-nmq {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin: 10px;
+}
+.login-button {
+  flex-basis: 50%;
+}
+#club-title {
+  flex: 4;
+}
+#club-edit-button {
+  flex: 1;
 }
 
 /* Styling the text display for the main page. */
@@ -158,21 +186,21 @@ input[type="text"] {
   padding: 12px 20px 12px 40px;
 }
 
-.search{
+.search {
   position: absolute;
   border: 1px solid red;
   top: 20px;
   right: 15px;
 }
 
-.addClub{
+.addClub {
   position: absolute;
   border: 1px solid red;
   top: 250px;
-  right: 900px
+  right: 900px;
 }
 
-.earlFooter{
+.earlFooter {
   position: relative;
   left: 0;
   bottom: 0;
@@ -187,7 +215,9 @@ nav {
 }
 
 /* Styling the table for the user list*/
-table, th, td {
+table,
+th,
+td {
   border: 1px solid black;
 }
 
