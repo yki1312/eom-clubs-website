@@ -1,0 +1,47 @@
+nav {
+  position: sticky;
+}
+.clr-float {
+  clear: both;
+}
+@media (min-width: 760px) {
+  .flex-container-h {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid black;
+    margin: 20px;
+  }
+  #club-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 0px;
+    margin: 0px;
+  }
+  .flex-container-v {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    margin: 20px;
+  }
+}
+.club-basic-info {
+  flex: 1;
+}
+#club-title {
+  flex: 4;
+}
+#club-edit-button {
+  flex: 1;
+}
+.club-suggestions {
+  flex: 2;
+}
+.club-member-list {
+  flex: 1;
+}
