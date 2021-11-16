@@ -14,6 +14,10 @@ p {
   display: inline;
 }
 
+header {
+  background-color: MediumSeaGreen;
+}
+
 h1 {
   font-family: "Times New Roman", Times, serif;
   color: black;
