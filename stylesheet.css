@@ -177,6 +177,18 @@ td {
   border: 1px solid black;
 }
 
+#userTable{
+  border-collapse: collapse; /* Collapse borders */
+  width: 80%; 
+  font-size: 18px; /* Increase font-size */
+}
+
+#userTable tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
 /* Rounded border for dividers in suggestions */
 hr.rounded {
   border-top: 8px solid #bbb;
