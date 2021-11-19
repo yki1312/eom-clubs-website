@@ -4,13 +4,14 @@
         <title>EoM Clubs Website - User List Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <link rel="stylesheet" href="../stylesheet.css">
+        <link rel="icon" type="image/x-icon" href="../Logos/finalDesigns/Favicon/favicon8.ico">
 
     </head>
 
     <body>
         <header>
             <img src=../Logos/finalDesigns/Logo_4_Edited.png alt="Logo" width="200px" style="padding-top: 10px;">
-            <i><h1 class="bannerText"> Welcome to EOM Clubs!</h1></i>
+            <i><h1 class="bannerText">Welcome to EOM Clubs!</h1></i>
         </header> 
         
          
@@ -43,7 +44,7 @@
         <br>
         <table id="userTable">
             <tr>
-              <th>Number of Users</th>
+              <th>User ID</th>
               <th width="70%">User Email</th>
               <th>Delete User</th>
             </tr>
@@ -61,7 +62,12 @@
                 <td>3</td>
                 <td>roland.mendel@gmail.com</td>
                 <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
-              </tr>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>fabiola.chang@gmail.com</td>
+                <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+            </tr>
         </table>
 
         <!--To delete rows in a table using Html-->
@@ -76,12 +82,45 @@
         <!--Created a search for the user list page.-->
         <br>
         <br>
-        <form class="userSearch">
+        <!--<form class="userSearch">
             <input type="text" name="search" placeholder="Search user...">
         </form>
         <br>
+        -->
 
-        <a href="invitationCode.html"><input type="button" value="Invitation Code Page" class="addClub"></a>
+        <form class="userSearch">
+            <input type="text" name="search" onkeyup="myFunction()" id="myInput" placeholder="Search user...">
+        </form>
+        <br>
+
+        <script>
+            function myFunction() {
+              // Declare variables
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("userTable");
+              tr = table.getElementsByTagName("tr");
+            
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1]; //I needed to search from the second row User Email! It was set to the first.
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+        </script>
+
+      
+
+
+        <a href="invitationCode.html"><input type="button" value="Create Invitation Code" class="addClub"></a>
 
         
         <br>
