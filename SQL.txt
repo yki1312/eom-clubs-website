@@ -1,46 +1,56 @@
-CREATE DATABASE test;
+CREATE DATABASE TestDB;
 
-CREATE TABLE Clubs (
-    Title VARCHAR(100),
-    Description VARCHAR(2000),
-    ContactInfo VARCHAR(500),
-    Media BLOB,
-    MemberCount INT,
-    PRIMARY KEY (Title)
+CREATE TABLE clubs (
+    clubsID INT(3) AUTO_INCREMENT,
+    clubsTitle VARCHAR(100) NOT NULL,
+    clubsDescription TEXT,
+    clubsContactInfo TEXT,
+    clubsMedia BLOB,
+    PRIMARY KEY (clubsID)
 );
+INSERT INTO clubs(clubsTitle, clubsDescription, clubsContactInfo) VALUES ('club 1', 'description of club 1', 'contact info of club 1');
+INSERT INTO clubs(clubsTitle, clubsDescription, clubsContactInfo) VALUES ('club 2', 'description of club 2', 'contact info of club 2');
 
-CREATE TABLE ClubMembers (
-    MemberID INT AUTO_INCREMENT,
-    Name VARCHAR(50) NOT NULL,
-    Club VARCHAR(100) NOT NULL,
-    PRIMARY KEY (MemberID),
-    FOREIGN KEY (Club) REFERENCES Clubs(Title)
+CREATE TABLE clubMembers (
+    clubMembersID INT(11) AUTO_INCREMENT,
+    clubMembersName VARCHAR(50) NOT NULL,
+    clubMembersClub INT(3) NOT NULL,
+    PRIMARY KEY (clubMembersID),
+    FOREIGN KEY (clubMembersClub) REFERENCES clubs(clubsID)
 );
+INSERT INTO clubMembers(clubMembersName, clubMembersClub) VALUES ('Name 1', 1);
+INSERT INTO clubMembers(clubMembersName, clubMembersClub) VALUES ('Name 2', 1);
+INSERT INTO clubMembers(clubMembersName, clubMembersClub) VALUES ('Name 3', 2);
 
-CREATE TABLE ClubSuggestions (
-    SuggestionID INT AUTO_INCREMENT,
-    Suggestion VARCHAR(2000) NOT NULL,
-    Club VARCHAR(100) NOT NULL,
-    PRIMARY KEY (SuggestionID),
-    FOREIGN KEY (Club) REFERENCES Clubs(Title)
+CREATE TABLE clubSuggestions (
+    clubSuggestionsID INT(11) AUTO_INCREMENT,
+    clubSuggestionsContent TEXT NOT NULL,
+    clubSuggestionsClub INT(3) NOT NULL,
+    clubSuggestionsCreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (clubSuggestionsID),
+    FOREIGN KEY (clubSuggestionsClub) REFERENCES clubs(clubsID)
 );
+INSERT INTO clubSuggestions(clubSuggestionsContent, clubSuggestionsClub) VALUES ('some suggestion', 1);
+INSERT INTO clubSuggestions(clubSuggestionsContent, clubSuggestionsClub) VALUES ('other suggestion', 1);
+INSERT INTO clubSuggestions(clubSuggestionsContent, clubSuggestionsClub) VALUES ('more suggestion', 2);
 
-CREATE TABLE InvitationCodes (
-    InvitationCode INT,
-    CreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    AccountType VARCHAR(7) DEFAULT 'student',
-    PRIMARY KEY (InvitationCode)
+CREATE TABLE invitationCodes (
+    invitationCodesID INT(11),
+    invitationCodesCreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    invitationCodesAccountType VARCHAR(7) DEFAULT 'student',
+    PRIMARY KEY (invitationCodesID)
 );
+INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (12345, 'teacher');
+INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (67890, 'student');
 
-CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT,
-    Username VARCHAR(50) NOT NULL,
-    Password VARCHAR(50) NOT NULL,
-    InvitationCode INT NOT NULL,
-    CreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (UserID),
-    FOREIGN KEY (InvitationCode) REFERENCES InvitationCodes(InvitationCode)
+CREATE TABLE users (
+    usersID INT(11) AUTO_INCREMENT,
+    usersUid VARCHAR(50) NOT NULL,
+    usersPwd VARCHAR(50) NOT NULL,
+    usersInvCode INT(11) NOT NULL,
+    usersCreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (usersID),
+    FOREIGN KEY (usersInvCode) REFERENCES invitationCodes(invitationCodesID)
 );
-
-INSERT INTO InvitationCodes(InvitationCode, AccountType) VALUES (12345, 'teacher');
-INSERT INTO Users(Username, Password, InvitationCode) VALUES ('MasterUser', '12345', 12345);
+INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Teacher Example', '12345', 12345);
+INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Student Example', '67890', 67890);
