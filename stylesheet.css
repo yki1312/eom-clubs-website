@@ -100,9 +100,11 @@ li a,
 
 /* Styling the club list so that it shows in a better way. */
 
-ol.four {
+.clubList {
+  color:black;
+  background-color: none;
   position: absolute;
-  padding: 25px;
+  padding: 15px;
 }
 
 /* Styling the search function.*/
