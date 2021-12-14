@@ -20,7 +20,7 @@ session_start();
     <nav>
         <ul>
             <li class="dropdown">
-                <a href="index.php" class="dropbtn">Clubs</a>
+                <a href="main_page.php" class="dropbtn">Clubs</a>
                 <div class="dropdown-content">
                     <?php
                     $sql = "SELECT clubsID, clubsTitle FROM clubs";
@@ -33,15 +33,15 @@ session_start();
                     ?>
                 </div>
             </li>
-            <li><a href="suggestions.html">Suggestions Page</a></li>
+            <li><a href="suggestions.php">Suggestions Page</a></li>
             <li><a href="aboutEoM.html">EOM Clubs Page</a></li>
             <li class="dropdown">
                 <?php
                 if (isset($_SESSION["userUid"])) {
-                    echo "<a href=\"profile.html\" class=\"dropbtn\">Logged In</a>";
+                    echo "<a href=\"usersPages/profile.html\" class=\"dropbtn\">Logged In</a>";
                     echo "<div class=\"dropdown-content\">";
-                    echo "<a href=\"profile.html\">Your Profile</a>";
-                    echo "<a href=\"userList.html\">User List</a>";
+                    echo "<a href=\"usersPages/profile.html\">Your Profile</a>";
+                    echo "<a href=\"usersPages/userList.html\">User List</a>";
                     echo "<a href=\"includes/logout.inc.php\">Log Out</a>";
                     echo "</div>";
                 } else {

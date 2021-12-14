@@ -45,12 +45,12 @@ INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUE
 
 CREATE TABLE users (
     usersID INT(11) AUTO_INCREMENT,
-    usersUid VARCHAR(50) NOT NULL,
+    usersUid VARCHAR(50) UNIQUE NOT NULL,
     usersPwd VARCHAR(255) NOT NULL,
     usersInvCode INT(11) NOT NULL,
     usersCreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (usersID),
     FOREIGN KEY (usersInvCode) REFERENCES invitationCodes(invitationCodesID)
 );
-INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('TeacherEx', '12345', 12345);
-INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('StudentEx', '67890', 67890);
+INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Teacher Example', '12345', 12345);
+INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Student Example', '67890', 67890);

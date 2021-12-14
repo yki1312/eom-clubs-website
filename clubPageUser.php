@@ -18,7 +18,7 @@ if (mysqli_num_rows($result) == 1) {
 //write else statement here for error instructions
 ?>
 <section>
-    <form action="includes/clubPageUser.inc.php?club=<?php echo $clubsID; ?>">
+    <form action="includes/clubPageUser.inc.php">
         <div class="flex-container-h">
             <div class="flex-container-v club-basic-info">
                 <label for="clubTitle" class="club-label">Club Title</label>
@@ -34,6 +34,7 @@ if (mysqli_num_rows($result) == 1) {
                 <br />
                 <label for="clubMedia" class="club-label">Upload Images</label>
                 <input name="clubMedia" type="file">
+                <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
             </div>
         </div>
         <div class="flex-container-h-nmq">

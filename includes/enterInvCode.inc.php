@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["submit"])) {
 
-    $invCode = $_POST["invCode"];
+    $invCode = trim($_POST["invCode"]);
     //trim($invCode);
 
     require_once 'dbh.inc.php';
@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
         header("location: ../enterInvCode.php?error=expiredinvcode");
         exit();
     }*/
-    useInvCode($invCode);
+    validInvCode($invCode);
 } else {
     header("location: ../enterInvCode.php");
     exit();

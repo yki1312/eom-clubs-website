@@ -1,3 +1,5 @@
+<!-- people can currently go to clubs that don't exist via club=clubID that don't exisit in url
+use an if statement to check if club in GET variable exisits as clubID first -->
 <?php
 include_once 'header.php';
 $clubsID = $_GET['club'];
@@ -40,10 +42,10 @@ if (mysqli_num_rows($result) == 1) {
     </div>
 </section>
 <hr />
-<!-- only display this when signed in -->
-<?php
-// echo js that stops displaying this?
-?>
+<!-- 
+below should be signed in view only!
+in php, echo js that stops displaying this? might display on view source on client side tho
+-->
 <section>
     <div class="flex-container-h">
         <div class="flex-container-v club-suggestions">

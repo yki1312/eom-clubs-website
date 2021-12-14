@@ -1,5 +1,9 @@
-<?php include_once 'header.php'; ?>
-<!-- if (isset($_GET[invCode])) -->
+<?php
+include_once 'header.php';
+if (!isset($_GET["invCode"]) && !isset($_GET["error"])) {
+    header("location: enterInvCode.php?error=noinvcode");
+}
+?>
 <section>
     <h1> Create an Account </h1>
     <form action="includes/createAccount.inc.php" method="post" class="flex-container-v">
@@ -31,7 +35,7 @@
                 echo "<p>Something went wrong! Please try again.</p>";
                 break;
             case "none":
-                echo "<p>You've successfully signed up!</p>";
+                echo "<p>Your account has been successfully created! <a href=\"login.php\">Login here.</a></p>";
         }
     }
     ?>

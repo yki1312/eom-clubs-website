@@ -6,7 +6,6 @@
         <label for="invCode">Enter invitation code:</label>
         <input type="text" name="invCode" placeholder="Invitation Code..." required>
         <button type="submit" name="submit">Submit</button>
-        <a href="createAccount.php">temp link to account creation</a>
     </form>
     <?php
     if (isset($_GET["error"])) {

@@ -5,11 +5,13 @@ function emptyInputInvCode($invCode)
 }
 function invalidInvCode($invCode)
 {
-    $result = true; // preg_match() returns 1 or 0
+    // preg_match() returns 1 or 0
+    $result = true;
     if (preg_match("/^[0-9]*$/", $invCode)) {
         $result = false;
         return $result;
     }
+    // add code block here to check the length of $invCode (make sure it's 11 characters)
     return $result;
 }
 function invCodeExists($conn, $invCode)
@@ -23,7 +25,11 @@ function invCodeExists($conn, $invCode)
     }
 
     mysqli_stmt_bind_param($stmt, "i", $invCode);
-    mysqli_stmt_execute($stmt);
+    if (!mysqli_stmt_execute($stmt)) {
+        header("location: ../enterInvCode.php?error=exefailed");
+        // &invcode=" . $invCode
+        exit();
+    }
 
     $resultData = mysqli_stmt_get_result($stmt);
 
@@ -46,7 +52,11 @@ function usedInvCode($conn, $invCode)
     }
 
     mysqli_stmt_bind_param($stmt, "i", $invCode);
-    mysqli_stmt_execute($stmt);
+    if (!mysqli_stmt_execute($stmt)) {
+        header("location: ../enterInvCode.php?error=exefailed");
+        // &invcode=" . $invCode
+        exit();
+    }
 
     $result = mysqli_stmt_get_result($stmt);
 
@@ -69,7 +79,11 @@ function expiredInvCode($conn, $invCode){
     }
 
     mysqli_stmt_bind_param($stmt, "i", $invCode);
-    mysqli_stmt_execute($stmt);
+    if(!mysqli_stmt_execute($stmt)){
+        header("location: ../enterInvCode.php?error=exefailed");
+        //&invcode=" . $invCode
+        exit();
+    }
 
     $result = mysqli_stmt_get_result($stmt);
 
@@ -82,9 +96,8 @@ function expiredInvCode($conn, $invCode){
 
     return $expiredInvCode;
 }*/
-function useInvCode($invCode)
+function validInvCode($invCode)
 {
-    // is this the best method to pass on the inv code?
     header("location: ../createAccount.php?invCode=" . $invCode);
     exit();
 }
@@ -92,7 +105,7 @@ function emptyInputSignup($uid, $pwd, $rePwd)
 {
     return empty($uid) || empty($pwd) || empty($rePwd);
 }
-function invalidUID($uid)
+/*function invalidUID($uid)
 {
     $result = true;
     if (preg_match("/^[a-zA-Z0-9]*$/", $uid)) {
@@ -100,7 +113,7 @@ function invalidUID($uid)
         return $result;
     }
     return $result;
-}
+}*/
 function uidExists($conn, $uid)
 {
     $sql = "SELECT * FROM users WHERE usersUid = ?;";
@@ -111,7 +124,11 @@ function uidExists($conn, $uid)
     }
 
     mysqli_stmt_bind_param($stmt, "s", $uid);
-    mysqli_stmt_execute($stmt);
+    if (!mysqli_stmt_execute($stmt)) {
+        header("location: ../createAccount.php?error=exefailed");
+        //&uid=" . $uid
+        exit();
+    }
 
     $resultData = mysqli_stmt_get_result($stmt);
 
@@ -130,7 +147,6 @@ function pwdMatch($pwd, $rePwd)
 {
     return $pwd === $rePwd;
 }
-//use trim($uid) to get rid of whitespace around passed in variable
 function createUser($conn, $uid, $pwd, $invCode)
 {
     $sql = "INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES(?, ?, ?);";
@@ -143,7 +159,12 @@ function createUser($conn, $uid, $pwd, $invCode)
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
     mysqli_stmt_bind_param($stmt, "ssi", $uid, $hashedPwd, $invCode);
-    mysqli_stmt_execute($stmt);
+    //make execute error proofs like this for uidExists, usedInvCode, invCodeExists, expiredInvCode
+    if (!mysqli_stmt_execute($stmt)) {
+        header("location: ../createAccount.php?error=exefailed");
+        //&uid=" . $uid . "&invCode=" . $invCode . "&pwd=" . $hashedPwd
+        exit();
+    };
 
     mysqli_stmt_close($stmt);
     header("location: ../createAccount.php?error=none");
@@ -162,18 +183,18 @@ function loginUser($conn, $uid, $pwd)
     }
     $pwdHashed = $uidExists["usersPwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
-    /*   if ($pwdHashed == $pwd) {
+    /*to check if pwd equal without hashed (testing only)
+    if ($pwdHashed == $pwd) {
         $checkPwd = true;
     } else {
         $checkPwd = false;
-    }
-    */
+    }*/
     if ($checkPwd === false) {
         header("location: ../login.php?error=incorrectpwd");
         exit();
     } else if ($checkPwd === true) {
         session_start();
-        $_SESSION["userId"] = $uidExists["usersId"];
+        $_SESSION["userId"] = $uidExists["usersID"];
         $_SESSION["userUid"] = $uidExists["usersUid"];
         $userInvCode = $uidExists["usersInvCode"];
         $sql = "SELECT invitationCodesAccountType FROM invitationCodes WHERE invitationCodesID=$userInvCode;";

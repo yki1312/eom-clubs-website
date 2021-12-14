@@ -1,9 +1,9 @@
 <?php
 if (isset($_POST["submit"])) {
 
-    $uid = $_POST["uid"];
-    $pwd = $_POST["pwd"];
-    $rePwd = $_POST["rePwd"];
+    $uid = trim($_POST["uid"]);
+    $pwd = trim($_POST["pwd"]);
+    $rePwd = trim($_POST["rePwd"]);
     $invCode = $_POST["invCode"];
 
     require_once 'dbh.inc.php';
