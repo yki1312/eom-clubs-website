@@ -1,5 +1,5 @@
 <?php include_once 'header.php'; ?>
-
+<!-- if (isset($_GET[invCode])) -->
 <section>
     <h1> Create an Account </h1>
     <form action="includes/createAccount.inc.php" method="post" class="flex-container-v">
@@ -9,7 +9,7 @@
         <input type="password" name="pwd" placeholder="Password..." required>
         <label for="rePwd">Confirm your password:</label>
         <input type="password" name="rePwd" placeholder="Repeat Password..." required>
-
+        <input type="hidden" name="invCode" value="<?php echo $_GET["invCode"]; ?>">
         <button type="submit" name="submit">Create Account</button>
     </form>
     <?php

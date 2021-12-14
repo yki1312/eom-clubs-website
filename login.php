@@ -11,7 +11,7 @@
         </div>
         <div class="flex-container-h-nmq">
             <a href="enterInvCode.php" class="login-button">Don't Have an Account?</a>
-            <button type="submit" class="login-button">Log In</button>
+            <button type="submit" name="submit" class="login-button">Log In</button>
         </div>
     </form>
     <?php

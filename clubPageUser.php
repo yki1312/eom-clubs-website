@@ -1,11 +1,9 @@
-<!-- Add delete club option 
-also figure out when to stop database connection
--->
+<!-- Add delete club option -->
 <?php
 include_once 'header.php';
 $clubsID = $_GET['club'];
-if (!isset($_SESSION["userId"])) {
-    header("location: clubPage.php?=" . $clubsID);
+if (!isset($_SESSION["userUid"])) {
+    header("location: clubPage.php?club=" . $clubsID);
 }
 $sql = "SELECT clubsTitle, clubsDescription, clubsContactInfo, clubsMedia FROM clubs WHERE clubsID=$clubsID;";
 $result = mysqli_query($conn, $sql);
@@ -42,7 +40,6 @@ if (mysqli_num_rows($result) == 1) {
             <a href="clubPage.php?club=<?php echo $clubsID; ?>">temp link to view only page</a>
             <button type="submit" name="save">Save Changes</button>
         </div>
-        <!-- use prepared statement when writing the php processing function! -->
     </form>
     <hr />
     <div class="flex-container-h">

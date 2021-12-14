@@ -5,15 +5,14 @@ function emptyInputInvCode($invCode)
 }
 function invalidInvCode($invCode)
 {
-    $result = true;
-    if (!preg_match("/^[0-9]*$/", $invCode)) {
+    $result = true; // preg_match() returns 1 or 0
+    if (preg_match("/^[0-9]*$/", $invCode)) {
         $result = false;
         return $result;
-    } else {
-        return $result;
     }
+    return $result;
 }
-function useInvCode($conn, $invCode)
+function invCodeExists($conn, $invCode)
 {
     $invCodeExists = false;
     $sql = "SELECT invitationCodesID FROM invitationCodes WHERE invitationCodesID = ?;";
@@ -26,24 +25,68 @@ function useInvCode($conn, $invCode)
     mysqli_stmt_bind_param($stmt, "i", $invCode);
     mysqli_stmt_execute($stmt);
 
-    $result = mysqli_stmt_get_result($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
 
-    if (mysqli_num_rows($result) == 1) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $invCodeExists = ($row["invitationCodesID"] === $invCode);
-        }
+    if ($row = mysqli_fetch_assoc($resultData)) {
+        $invCodeExists = true;
     }
 
     mysqli_stmt_close($stmt);
 
-    if ($invCodeExists === false) {
-        header("location: ../enterInvCode.php?error=nomatchinginvcode");
-        exit();
-    } else if ($invCodeExists === true) {
-        $_POST["invCode"] = $invCode;
-        header("location: ../createAccount.php");
+    return $invCodeExists;
+}
+function usedInvCode($conn, $invCode)
+{
+    $usedInvCode = false;
+    $sql = "SELECT usersInvCode FROM users WHERE usersInvCode = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../enterInvCode.php?error=stmtfailed");
         exit();
     }
+
+    mysqli_stmt_bind_param($stmt, "i", $invCode);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) > 0) {
+        $usedInvCode = true;
+    }
+
+    mysqli_stmt_close($stmt);
+
+    return $usedInvCode;
+}
+/* check if the inv code is expired
+function expiredInvCode($conn, $invCode){
+    $expiredInvCode = true;
+    $sql = "SELECT invitationCodesCreationTime FROM invitationCodes WHERE invitationCodesID = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../enterInvCode.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $invCode);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        
+    }
+
+    mysqli_stmt_close($stmt);
+
+    return $expiredInvCode;
+}*/
+function useInvCode($invCode)
+{
+    // is this the best method to pass on the inv code?
+    header("location: ../createAccount.php?invCode=" . $invCode);
+    exit();
 }
 function emptyInputSignup($uid, $pwd, $rePwd)
 {
@@ -52,16 +95,14 @@ function emptyInputSignup($uid, $pwd, $rePwd)
 function invalidUID($uid)
 {
     $result = true;
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $uid)) {
-        $result = false;
-        return $result;
-    } else {
+    if (preg_match("/^[a-zA-Z0-9]*$/", $uid)) {
+        $result = true;
         return $result;
     }
+    return $result;
 }
 function uidExists($conn, $uid)
 {
-    $result = false;
     $sql = "SELECT * FROM users WHERE usersUid = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -69,32 +110,30 @@ function uidExists($conn, $uid)
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $uid);
+    mysqli_stmt_bind_param($stmt, "s", $uid);
     mysqli_stmt_execute($stmt);
 
     $resultData = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
-    } else {
-        return $result;
+        $result = $row;
     }
 
     mysqli_stmt_close($stmt);
+
+    if (!empty($result)) {
+        return $result;
+    }
+    return false;
 }
 function pwdMatch($pwd, $rePwd)
 {
-    $result = false;
-    if ($pwd !== $rePwd) {
-        $result = true;
-        return $result;
-    } else {
-        return $result;
-    }
+    return $pwd === $rePwd;
 }
+//use trim($uid) to get rid of whitespace around passed in variable
 function createUser($conn, $uid, $pwd, $invCode)
 {
-    $sql = "INSERT INTO users(usersUID, usersPwd, usersInvCode) VALUES(?, ?, ?);";
+    $sql = "INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES(?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../createAccount.php?error=stmtfailed");
@@ -105,19 +144,14 @@ function createUser($conn, $uid, $pwd, $invCode)
 
     mysqli_stmt_bind_param($stmt, "ssi", $uid, $hashedPwd, $invCode);
     mysqli_stmt_execute($stmt);
+
     mysqli_stmt_close($stmt);
     header("location: ../createAccount.php?error=none");
     exit();
 }
 function emptyInputLogin($uid, $pwd)
 {
-    $result = false;
-    if (empty($uid) || empty($pwd)) {
-        $result = true;
-        return $result;
-    } else {
-        return $result;
-    }
+    return empty($uid) || empty($pwd);
 }
 function loginUser($conn, $uid, $pwd)
 {
@@ -128,6 +162,12 @@ function loginUser($conn, $uid, $pwd)
     }
     $pwdHashed = $uidExists["usersPwd"];
     $checkPwd = password_verify($pwd, $pwdHashed);
+    /*   if ($pwdHashed == $pwd) {
+        $checkPwd = true;
+    } else {
+        $checkPwd = false;
+    }
+    */
     if ($checkPwd === false) {
         header("location: ../login.php?error=incorrectpwd");
         exit();
@@ -135,13 +175,12 @@ function loginUser($conn, $uid, $pwd)
         session_start();
         $_SESSION["userId"] = $uidExists["usersId"];
         $_SESSION["userUid"] = $uidExists["usersUid"];
-        $userInvCode = $uidExists["usersInVCode"];
+        $userInvCode = $uidExists["usersInvCode"];
         $sql = "SELECT invitationCodesAccountType FROM invitationCodes WHERE invitationCodesID=$userInvCode;";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) == 1) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $_SESSION["userRole"] = $row["invitationCodesAccountType"];
-            }
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION["userRole"] = $row["invitationCodesAccountType"];
         }
         header("location: ../index.php");
         exit();

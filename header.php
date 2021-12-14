@@ -7,7 +7,7 @@ session_start();
 <head>
     <title> EoM Clubs Website </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 
@@ -20,7 +20,7 @@ session_start();
     <nav>
         <ul>
             <li class="dropdown">
-                <a href="main_page.php" class="dropbtn">Clubs</a>
+                <a href="index.php" class="dropbtn">Clubs</a>
                 <div class="dropdown-content">
                     <?php
                     $sql = "SELECT clubsID, clubsTitle FROM clubs";

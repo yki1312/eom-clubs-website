@@ -14,11 +14,17 @@
             case "emptyinput":
                 echo "<p>Fill in the field!</p>";
                 break;
-            case "invaliduid":
+            case "invalidinvcode":
                 echo "<p>Invitation codes are 11 numbers.</p>";
                 break;
             case "nomatchinginvcode":
                 echo "<p>Invitation code does not exist!</p>";
+                break;
+            case "usedinvcode":
+                echo "<p>Invitation code has already been used!</p>";
+                break;
+            case "expiredinvcode":
+                echo "<p>Invitation code has already expired!</p>";
         }
     }
     ?>
