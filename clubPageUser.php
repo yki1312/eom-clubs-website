@@ -23,7 +23,6 @@ if (mysqli_num_rows($result) == 1) {
             <div class="flex-container-v club-basic-info">
                 <label for="clubTitle" class="club-label">Club Title</label>
                 <input name="clubTitle" type="text" value="<?php echo $title; ?>" required>
-                <button type="submit" name="delete">Delete Club</button>
                 <br />
                 <label for="clubDescription" class="club-label">Club Description</label>
                 <textarea name="clubDescription"><?php echo $description; ?></textarea>
@@ -37,8 +36,11 @@ if (mysqli_num_rows($result) == 1) {
                 <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
             </div>
         </div>
-        <div class="flex-container-h-nmq">
-            <a href="clubPage.php?club=<?php echo $clubsID; ?>">temp link to view only page</a>
+        <!-- delete this link when done -->
+        <a href="clubPage.php?club=<?php echo $clubsID; ?>">temp link to view only page</a>
+        <!-- fix this style; class="flex-container-h-nmq" -->
+        <div style="float: right">
+            <button type="submit" name="delete">Delete Club</button>
             <button type="submit" name="save">Save Changes</button>
         </div>
     </form>

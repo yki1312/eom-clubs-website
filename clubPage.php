@@ -41,17 +41,52 @@ if (mysqli_num_rows($result) == 1) {
         </div>
     </div>
 </section>
-<hr />
 <!-- 
 below should be signed in view only!
 in php, echo js that stops displaying this? might display on view source on client side tho
 -->
-<section>
+<?php
+if (isset($_SESSION["userUid"])) {
+    echo "<hr/>";
+    echo "<section>";
+    echo "<div class=\"flex-container-h\">";
+    echo "<div class=\"flex-container-v club-suggestions\">";
+    echo "<h2>Suggestions</h2>";
+    echo "<ol class=\"flex-container-v\">";
+    $sql = "SELECT clubSuggestionsContent, clubSuggestionsCreationTime FROM clubSuggestions WHERE clubSuggestionsClub=$clubsID ORDER BY clubSuggestionsID DESC;";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<li><p>Written at: " . $row["clubSuggestionsCreationTime"] . " (UTC)</p><p>" . $row["clubSuggestionsContent"] . "</p></li>";
+        }
+    }
+    //write else statement here for error instructions
+    echo "</ol>";
+    echo "</div>";
+    echo "<div class=\"flex-container-v club-member-list\">";
+    echo "<h2>Member List</h2>";
+    echo "<ol class=\"flex-container-v\">";
+    // SELECT COUNT(clubMembersID) FROM clubMembers WHERE clubMembersID=$clubsID
+    $sql = "SELECT clubMembersName FROM clubMembers WHERE clubMembersClub=$clubsID ORDER BY clubMembersName;";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<li>" . $row["clubMembersName"] . "</li>";
+        }
+    }
+    //write else statement here for error instructions
+    echo "</ol>";
+    echo "</div>";
+    echo "</div>";
+    echo "</section>";
+}
+?>
+<!--<section>
     <div class="flex-container-h">
         <div class="flex-container-v club-suggestions">
             <h2>Suggestions</h2>
             <ol class="flex-container-v">
-                <?php
+                <?php /*
                 $sql = "SELECT clubSuggestionsContent, clubSuggestionsCreationTime FROM clubSuggestions WHERE clubSuggestionsClub=$clubsID ORDER BY clubSuggestionsID DESC;";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
@@ -60,13 +95,13 @@ in php, echo js that stops displaying this? might display on view source on clie
                     }
                 }
                 //write else statement here for error instructions
-                ?>
+                */ ?>
             </ol>
         </div>
         <div class="flex-container-v club-member-list">
             <h2>Member List</h2>
             <ol class="flex-container-v">
-                <?php
+                <?php /*
                 // SELECT COUNT(clubMembersID) FROM clubMembers WHERE clubMembersID=$clubsID
                 $sql = "SELECT clubMembersName FROM clubMembers WHERE clubMembersClub=$clubsID ORDER BY clubMembersName;";
                 $result = mysqli_query($conn, $sql);
@@ -76,9 +111,9 @@ in php, echo js that stops displaying this? might display on view source on clie
                     }
                 }
                 //write else statement here for error instructions
-                ?>
+                */ ?>
             </ol>
         </div>
     </div>
-</section>
+</section>-->
 <?php include_once 'footer.php'; ?>
