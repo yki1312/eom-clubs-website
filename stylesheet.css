@@ -1,3 +1,4 @@
+
 /* Styling the text display for the main page. */
 p {
   font-family: "Times New Roman", Times, serif;
@@ -83,6 +84,12 @@ ul {
   padding: 0;
   overflow: hidden;
   background-color: LightSlateGray;
+}
+
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0px;
 }
 
 li {
