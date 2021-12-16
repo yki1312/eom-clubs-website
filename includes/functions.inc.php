@@ -207,3 +207,71 @@ function loginUser($conn, $uid, $pwd)
         exit();
     }
 }
+function emptyInputClubPage($id, $title)
+{
+    return empty($id) || empty($title);
+}
+function updateClubPage($conn, $id, $title, $description, $contact, $media)
+{
+    $sql = "UPDATE clubs SET clubsTitle=?, clubsDescription=?, clubsContactInfo=?, clubsMedia=? WHERE clubsID=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../createAccount.php?club=" . $id . "&error=stmtfailed");
+        exit();
+    }
+
+    //what is datatype for blob??
+    mysqli_stmt_bind_param($stmt, "sssbi", $title, $description, $contact, $media, $id);
+    if (!mysqli_stmt_execute($stmt)) {
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exefailed");
+        exit();
+    };
+
+    mysqli_stmt_close($stmt);
+    header("location: ../clubPageUser.php?club=" . $id . "&error=none");
+    exit();
+}
+function deleteClubPage($conn, $id)
+{
+    $sql1 = "DELETE FROM clubs WHERE clubsID=?;";
+    $stmt1 = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt1, $sql1)) {
+        header("location: ../createAccount.php?club=" . $id . "&error=stmt1failed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt1, "i", $id);
+    if (!mysqli_stmt_execute($stmt1)) {
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe1failed");
+        exit();
+    };
+    mysqli_stmt_close($stmt1);
+
+    $sql2 = "DELETE FROM clubSuggestions WHERE clubSuggestionsClub=?;";
+    $stmt2 = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt2, $sql2)) {
+        header("location: ../createAccount.php?club=" . $id . "&error=stmt2failed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt2, "i", $id);
+    if (!mysqli_stmt_execute($stmt2)) {
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe2failed");
+        exit();
+    };
+    mysqli_stmt_close($stmt2);
+
+    $sql3 = "DELETE FROM clubMembers WHERE clubMembersClub=?;";
+    $stmt3 = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt3, $sql3)) {
+        header("location: ../createAccount.php?club=" . $id . "&error=stmt3failed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt3, "i", $id);
+    if (!mysqli_stmt_execute($stmt3)) {
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe3failed");
+        exit();
+    };
+    mysqli_stmt_close($stmt3);
+
+    header("location: ../main_page.php?error=none");
+    exit();
+}
