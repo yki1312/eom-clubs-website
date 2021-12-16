@@ -203,7 +203,7 @@ function loginUser($conn, $uid, $pwd)
             $row = mysqli_fetch_assoc($result);
             $_SESSION["userRole"] = $row["invitationCodesAccountType"];
         }
-        header("location: ../index.php");
+        header("location: ../main_page.php");
         exit();
     }
 }

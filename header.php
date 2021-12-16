@@ -7,7 +7,7 @@ session_start();
 <head>
     <title> EoM Clubs Website </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 
@@ -34,14 +34,15 @@ session_start();
                 </div>
             </li>
             <li><a href="suggestions.php">Suggestions Page</a></li>
-            <li><a href="aboutEoM.html">EOM Clubs Page</a></li>
+            <li><a href="EOMpage.php">EOM Clubs Page</a></li>
+
             <li class="dropdown">
                 <?php
                 if (isset($_SESSION["userUid"])) {
                     echo "<a href=\"usersPages/profile.html\" class=\"dropbtn\">Logged In</a>";
                     echo "<div class=\"dropdown-content\">";
-                    echo "<a href=\"usersPages/profile.html\">Your Profile</a>";
-                    echo "<a href=\"usersPages/userList.html\">User List</a>";
+                    echo "<a href=\"userProfile.php\">Your Profile</a>";
+                    echo "<a href=\"userListPage.php\">User List</a>";
                     echo "<a href=\"includes/logout.inc.php\">Log Out</a>";
                     echo "</div>";
                 } else {
@@ -51,3 +52,9 @@ session_start();
             </li>
         </ul>
     </nav>
+    <!-- Created a date display to be output to the screen.-->
+    <p id="demo" style="border:5px solid yellow" class="date"></p>
+    <script>
+        const d = new Date();
+        document.getElementById("demo").innerHTML = d.toDateString();
+    </script>
