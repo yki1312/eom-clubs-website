@@ -18,7 +18,7 @@ session_start();
     </header>
     <?php require 'includes/dbh.inc.php'; ?>
     <nav>
-        <ul>
+        <ul class="nav">
             <li class="dropdown">
                 <a href="main_page.php" class="dropbtn">Clubs</a>
                 <div class="dropdown-content">

@@ -76,18 +76,12 @@ li.dropdown {
 }
 
 /* Styling the navigation bar */
-ul {
+.nav {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: LightSlateGray;
-}
-
-ol {
-  list-style-type: none;
-  margin: 0;
-  padding: 0px;
 }
 
 li {
@@ -113,7 +107,7 @@ li a,
 }
 
 /* Styling the search function.*/
-input[type="text"] {
+.search-bar {
   width: 100%;
   box-sizing: border-box;
   border: 2px solid #ccc;
