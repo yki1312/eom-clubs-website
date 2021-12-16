@@ -1,4 +1,3 @@
-<!-- Add delete club option -->
 <?php
 include_once 'header.php';
 $clubsID = $_GET['club'];
@@ -18,7 +17,7 @@ if (mysqli_num_rows($result) == 1) {
 //write else statement here for error instructions
 ?>
 <section>
-    <form action="includes/clubPageUser.inc.php">
+    <form action="includes/clubPageUser.inc.php" method="post">
         <div class="flex-container-h">
             <div class="flex-container-v club-basic-info">
                 <label for="clubTitle" class="club-label">Club Title</label>
@@ -44,7 +43,27 @@ if (mysqli_num_rows($result) == 1) {
             <button type="submit" name="save">Save Changes</button>
         </div>
     </form>
+    <?php
+    if (isset($_GET["error"])) {
+        switch ($_GET["error"]) {
+            case "emptyinput":
+                echo "<p>Fill the title of the club!</p>";
+                break;
+            case "stmt1failed":
+            case "exe1failed":
+            case "stmt2failed":
+            case "exe2failed":
+            case "stmt3failed":
+            case "exe3failed":
+                echo "<p>Something went wrong! Please try again.</p>";
+                break;
+            case "none":
+                echo "<p>Successfully updated.</p>";
+        }
+    }
+    ?>
     <hr />
+    <!-- link to inc page or interact with database right here -->
     <div class="flex-container-h">
         <div class="flex-container-v club-suggestions">
             <h2>Suggestions</h2>
