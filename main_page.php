@@ -13,7 +13,7 @@
 
 
     <!--Create a search using CSS.-->
-    <form class="search">
+    <form class="search-bar">
         <input type="text" name="search" onkeyup="searchFunction()" id="myInput" placeholder="Search...">
     </form>
     <br>

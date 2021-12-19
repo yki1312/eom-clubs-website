@@ -18,27 +18,31 @@
 
         $records = mysqli_query($conn,"SELECT usersID, usersUid FROM users"); // fetch data from database
 
-        while($data = mysqli_fetch_array($records))
-        {
+        while($data = mysqli_fetch_array($records)) {
+            if($data['usersUid'] != $_SESSION["userUid"]) {
         ?>
         <tr>
             <td><?php echo $data['usersID']; ?></td>
             <td><?php echo $data['usersUid']; ?></td>
-            <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+            <td><a href="deleteUser.php?id=<?php echo $data['usersID']; ?>">Delete</a></td>
         </tr>	
         <?php
         }
+        }
         ?>
     </table>
-
-    <!--To delete rows in a table using Html-->
-    <script>
-        function deleteRow(r) {
-            var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("userTable").deleteRow(i);
+    
+    <?php
+        if (isset($_GET["error"])) {
+            switch ($_GET["error"]) {
+                case "errorUserDelete":
+                    echo "<p> <font color=red>Encountered error in deleting user.</font></p>";
+                    break;
+                case "none":
+                    echo "<p> <font color=green>User was deleted successfully!</font> </p> ";
+            }
         }
-    </script>
-
+    ?>
     
     <!--Created a search for the user list page.-->
     <br>
@@ -76,7 +80,7 @@
     
 
 
-    <a href="invitationCode.html"><input type="button" value="Create Invitation Code" class="addClub"></a>
+    <a href="createInvitationCode.php"><input type="button" value="Create Invitation Code" class="addClub"></a>
 
     
     <br>
@@ -87,6 +91,3 @@
 
     <?php include_once 'footer.php'?>
                
-
-    </body>
-</html>
