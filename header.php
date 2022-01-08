@@ -39,7 +39,7 @@ session_start();
             <li class="dropdown">
                 <?php
                 if (isset($_SESSION["userUid"])) {
-                    echo "<a href=\"usersPages/profile.html\" class=\"dropbtn\">Logged In</a>";
+                    echo "<a href=\"userProfile.php\" class=\"dropbtn\">Logged In</a>";
                     echo "<div class=\"dropdown-content\">";
                     echo "<a href=\"userProfile.php\">Your Profile</a>";
                     echo "<a href=\"userListPage.php\">User List</a>";
@@ -53,8 +53,8 @@ session_start();
         </ul>
     </nav>
     <!-- Created a date display to be output to the screen.-->
-    <p id="demo" style="border:5px solid yellow" class="date"></p>
+    <p id="show_date" style="border:5px solid yellow" class="date"></p>
     <script>
         const d = new Date();
-        document.getElementById("demo").innerHTML = d.toDateString();
+        document.getElementById("show_date").innerHTML = d.toDateString();
     </script>

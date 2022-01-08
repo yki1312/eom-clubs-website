@@ -5,7 +5,7 @@
     if (isset($_SESSION["userId"])) { 
     ?>
         <div class="addClub">
-            <a href="clubPages/exampleSubpageUser.html"><input type="button" value="Add a club +"></a>
+            <a href="addClub.php"><input type="button" value="Add a club +"></a>
         </div>
     <?php
     }
