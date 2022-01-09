@@ -21,16 +21,16 @@
                 <br>
                 <label for="ytext">Your username:</label><br>
                 <br>
-                <input type="text" id="ytext" name="ytext" value=<?php echo $_SESSION["userUid"]?>><br>
+                <input type="text" id="ytext" name="ytext" value=<?php echo $_SESSION["userUid"]?> readonly><br>
                 <br>
                 <br>
                 <label for="ypass">Your password:</label><br>
                 <br>
-                <input type="password" id="ypass" name="ypass" value="**********"><br><br>
+                <input type="password" id="ypass" name="ypass" value="**********" readonly><br><br>
                 <br>
                 <label for="ytype">Account Type:</label><br>
                 <br>
-                <input type="text" id="ytype" name="ytype" value=<?php echo $user_role["invitationCodesAccountType"]?>><br><br>
+                <input type="text" id="ytype" name="ytype" value=<?php echo $user_role["invitationCodesAccountType"]?> readonly><br><br>
                 <br>
                 <a href="includes/logout.inc.php"><input type="button" value="Sign Out"></a>
                 <a href="changePassword.html"><input type="button" value="Change Password"></a>

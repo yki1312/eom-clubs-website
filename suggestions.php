@@ -10,8 +10,6 @@
             <select name="club_name">
                 <option disabled selected>-- Select Club --</option>
                 <?php
-                    include_once 'includes/dbh.inc.php';
-
                     $records = mysqli_query($conn, "SELECT clubsTitle FROM clubs");  // Use select query here 
 
                     while($data = mysqli_fetch_array($records))
@@ -25,7 +23,7 @@
             
             <label>Type Your Suggestion Here:</label><br>
             <br>
-            <textarea cols="5" rows="40" name="comments" id="textClub"></textarea><br>
+            <textarea cols="5" rows="40" name="comments" maxlength = "2000" id="textClub"></textarea><br>
             <input type="submit" name="button" value="Submit"/>
         </form>
         <?php

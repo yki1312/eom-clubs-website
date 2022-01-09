@@ -78,11 +78,11 @@
     </script>
 
     
-
-
-    <a href="createInvitationCode.php"><input type="button" value="Create Invitation Code" class="addClub"></a>
-
-    
+    <?php
+        if ($_SESSION["userRole"] == "teacher") {
+            echo "<a href=\"createInvitationCode.php\"><input type=\"button\" value=\"Create Invitation Code\" class=\"addClub\"></a>";
+        }
+    ?>
     <br>
     <br>
     <br>

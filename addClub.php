@@ -4,13 +4,13 @@
 <section>
     <p><span class="error">* required fields</span></p>
     <form method="post" action="addClubInsert.php">  
-      Name of Club: <input type="text" name="clubName" required>
+      Name of Club: <input type="text" name="clubName" maxlength = "100" required>
       <span class="error">*</span>
       <br><br>
-      Contact Information: <input type="text" name="contact" required>
+      Contact Information: <input type="text" name="contact" maxlength = "500" required>
       <span class="error">*</span>
       <br><br>
-      Description: <textarea name="description" rows="5" cols="40" required></textarea>
+      Description: <textarea name="description" rows="5" cols="40" maxlength = "2000" required></textarea>
       <span class="error">*</span>
       <br><br>
       <input type="submit" name="submit" value="Submit">  
