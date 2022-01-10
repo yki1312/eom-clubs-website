@@ -1,8 +1,7 @@
 <?php
 include_once 'header.php';
 if (!isset($_SESSION["userUid"])) {
-    header("location: index.php");
-    //change this to main_page.php
+    header("location: main_page.php");
 }
 ?>
 <section>
@@ -17,6 +16,26 @@ if (!isset($_SESSION["userUid"])) {
         <input type="hidden" name="uid" value="<?php echo $_SESSION["userUid"]; ?>">
         <button type="submit" name="submit">Change Password</button>
     </form>
-
+    <?php
+    if (isset($_GET["error"])) {
+        switch ($_GET["error"]) {
+            case "nomatchinguid":
+                echo "<p>No matching UID!</p>";
+                break;
+            case "emptyinput":
+                echo "<p>Fill in all fields!</p>";
+                break;
+            case "pwddontmatch":
+                echo "<p>Passwords do not match!</p>";
+                break;
+            case "exe7failed":
+            case "stmt7failed":
+                echo "<p>Something went wrong! Please try again.</p>";
+                break;
+            case "none":
+                echo "<p>Your account has been successfully created! <a href=\"login.php\">Login here.</a></p>";
+        }
+    }
+    ?>
 </section>
 <?php include_once 'footer.php'; ?>

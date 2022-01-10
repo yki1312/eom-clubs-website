@@ -24,7 +24,6 @@ if (isset($_POST["submit"])) {
 
     changePwd($conn, $uid, $newPwd);
 } else {
-    header("location: ../index.php");
-    //change to main_page.php
+    header("location: ../main_page.php");
     exit();
 }
