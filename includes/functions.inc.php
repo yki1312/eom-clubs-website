@@ -326,7 +326,6 @@ function changePwd($conn, $uid, $newPwd)
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../changePwd.php?error=stmt7failed");
-        //change this to profile.php
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss", $hashedPwd, $uid);
@@ -335,7 +334,6 @@ function changePwd($conn, $uid, $newPwd)
         exit();
     };
     mysqli_stmt_close($stmt);
-    header("location: ../index.php?error=none");
-    //change to main_page.php
+    header("location: ../userProfile.php?error=none");
     exit();
 }
