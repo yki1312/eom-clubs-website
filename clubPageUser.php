@@ -43,7 +43,7 @@ if (mysqli_num_rows($result) == 1) {
     <?php
     if (isset($_GET["error"])) {
         switch ($_GET["error"]) {
-            case "emptyinputt":
+            case "emptyinput":
                 echo "<p>Fill the title of the club!</p>";
                 break;
             case "stmt1failed":

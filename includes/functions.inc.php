@@ -188,7 +188,7 @@ function loginUser($conn, $uid, $pwd)
             $row = mysqli_fetch_assoc($result);
             $_SESSION["userRole"] = $row["invitationCodesAccountType"];
         }
-        header("location: ../index.php");
+        header("location: ../main_page.php");
         exit();
     }
 }
@@ -294,7 +294,7 @@ function deleteClubPage($conn, $id)
     };
     mysqli_stmt_close($stmt3);
 
-    header("location: ../index.php?&error=none");
+    header("location: ../main_page.php?error=none");
     exit();
 }
 function deleteSuggestion($conn, $suggestionID, $clubID)
@@ -369,7 +369,6 @@ function changePwd($conn, $uid, $newPwd)
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../changePwd.php?error=stmt7failed");
-        //change this to profile.php
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss", $hashedPwd, $uid);
@@ -378,7 +377,6 @@ function changePwd($conn, $uid, $newPwd)
         exit();
     };
     mysqli_stmt_close($stmt);
-    header("location: ../index.php?error=none");
-    //change to main_page.php
+    header("location: ../userProfile.php?error=none");
     exit();
 }
