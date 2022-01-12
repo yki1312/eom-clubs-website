@@ -24,6 +24,10 @@
                 break;
             case "expiredinvcode":
                 echo "<p>Invitation code has already expired!</p>";
+                break;
+            case "smtmfailed":
+            case "exefailed":
+                echo "<p>Something went wrong! Please try again.</p>";
         }
     }
     ?>

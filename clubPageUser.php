@@ -18,35 +18,32 @@ if (mysqli_num_rows($result) == 1) {
 ?>
 <section>
     <form action="includes/clubPageUser.inc.php" method="post">
-        <div class="flex-container-h">
-            <div class="flex-container-v club-basic-info">
+        <div class="flex-container-v">
+            <div class="flex-container-v">
                 <label for="clubTitle" class="club-label">Club Title</label>
-                <input name="clubTitle" type="text" value="<?php echo $title; ?>" required>
+                <div class="flec-container-h club-basic-info">
+                    <input name="clubTitle" type="text" value="<?php echo $title; ?>" required>
+                    <button type="submit" name="delete">Delete Club</button>
+                </div>
                 <br />
                 <label for="clubDescription" class="club-label">Club Description</label>
                 <textarea name="clubDescription"><?php echo $description; ?></textarea>
-            </div>
-            <div class="flex-container-v club-basic-info">
+                <br />
                 <label for="clubContact" class="club-label">Contact Information</label>
                 <textarea name="clubContact"><?php echo $contact; ?></textarea>
-                <br />
-                <label for="clubMedia" class="club-label">Upload Images</label>
-                <input name="clubMedia" type="file">
                 <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
             </div>
         </div>
-        <!-- delete this link when done -->
-        <a href="clubPage.php?club=<?php echo $clubsID; ?>">temp link to view only page</a>
         <!-- fix this style; class="flex-container-h-nmq" -->
         <div style="float: right">
-            <button type="submit" name="delete">Delete Club</button>
             <button type="submit" name="save">Save Changes</button>
         </div>
+        <br />
     </form>
     <?php
     if (isset($_GET["error"])) {
         switch ($_GET["error"]) {
-            case "emptyinput":
+            case "emptyinputt":
                 echo "<p>Fill the title of the club!</p>";
                 break;
             case "stmt1failed":
@@ -63,21 +60,61 @@ if (mysqli_num_rows($result) == 1) {
     }
     ?>
     <hr />
-    <!-- link to inc page or interact with database right here -->
+    <form action="includes/clubPageUser.inc.php" method="post" enctype="multipart/form-data">
+        <label for="clubMedia" class="club-label">Upload Images</label>
+        <input name="clubMedia" type="file">
+        <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
+        <button type="submit" name="upload">Upload Image</button>
+        <img src="img/<?php echo $media; ?>" width="300" height=auto>
+    </form>
+    <?php
+    if (isset($_GET["error"])) {
+        switch ($_GET["error"]) {
+            case "disallowedtype":
+                echo "<p>Ensure you're uploading a jpg, jpeg, or png file!</p>";
+                break;
+            case "errorupload":
+            case "stmt7failed":
+            case "exe7failed":
+                echo "<p>Something went wrong! Please try again.</p>";
+                break;
+            case "uploadsuccess":
+                echo "<p>Successfully uploaded.</p>";
+        }
+    }
+    ?>
+    <hr />
     <div class="flex-container-h">
         <div class="flex-container-v club-suggestions">
             <h2>Suggestions</h2>
             <ol class="flex-container-v">
                 <?php
-                $sql = "SELECT clubSuggestionsContent, clubSuggestionsCreationTime FROM clubSuggestions WHERE clubSuggestionsClub=$clubsID ORDER BY clubSuggestionsID DESC;";
+                $sql = "SELECT * FROM clubSuggestions WHERE clubSuggestionsClub=$clubsID ORDER BY clubSuggestionsID DESC;";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<li><p>Written at: " . $row["clubSuggestionsCreationTime"] . " (UTC)</p><p>" . $row["clubSuggestionsContent"] . "</p><button type=\"button\">Delete Suggestion</button> </li>";
+                        echo "<li>";
+                        echo "<form action=\"includes/clubPageUser.inc.php\" method=\"post\">";
+                        echo "<p>Written at: " . $row["clubSuggestionsCreationTime"] . "</p>";
+                        echo "<p>" . $row["clubSuggestionsContent"] . "</p>";
+                        echo "<input type=\"hidden\" name=\"suggestionID\" value=\"" . $row["clubSuggestionsID"] . "\">";
+                        echo "<input type=\"hidden\" name=\"clubID\" value=\"" . $row["clubSuggestionsClub"] . "\">";
+                        echo "<button name=\"deleteSuggestion\" type=\"submit\">Delete Suggestion</button>";
+                        echo "</form>";
+                        echo "</li>";
                     }
                 }
-                //button onclick, delete row from suggestion table, delete <li> from html
                 //write else statement here for error instructions
+                if (isset($_GET["error"])) {
+                    switch ($_GET["error"]) {
+                        case "stmt4failed":
+                        case "exe4failed":
+                            echo "<p>Something went wrong! Please try again.</p>";
+                            break;
+                        case "none1":
+                            echo "<p>Successfully updated.</p>";
+                    }
+                }
                 ?>
             </ol>
         </div>
@@ -85,22 +122,53 @@ if (mysqli_num_rows($result) == 1) {
             <h2>Member List</h2>
             <ol class="flex-container-v">
                 <?php
-                $sql = "SELECT clubMembersName FROM clubMembers WHERE clubMembersClub=$clubsID ORDER BY clubMembersName;";
+                $sql = "SELECT * FROM clubMembers WHERE clubMembersClub=$clubsID ORDER BY clubMembersName;";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<li>" . $row["clubMembersName"] . "<button type=\"button\">Delete Member</button></li>";
+                        echo "<li>";
+                        echo "<form action=\"includes/clubPageUser.inc.php\" method=\"post\">";
+                        echo "<span>" . $row["clubMembersName"] . "  </span>";
+                        echo "<input type=\"hidden\" name=\"memberID\" value=\"" . $row["clubMembersID"] . "\">";
+                        echo "<input type=\"hidden\" name=\"clubID\" value=\"" . $row["clubMembersClub"] . "\">";
+                        echo "<button name=\"deleteMember\" type=\"submit\">Delete Member</button>";
+                        echo "</form>";
+                        echo "</li>";
                     }
                 }
                 //use prepared statement here
-                //button onclick, delete row from member table, delete <li> from html
                 //write else statement here for error instructions
                 ?>
-                <li><input name="newMember" type="text" placeholder="Name..."><button type="button">Add Member</button></li>
-                <!-- onclick: insert row into database + add the same html line again -->
+                <li>
+                    <form action="includes/clubPageUser.inc.php" method="post">
+                        <input name="newMember" type="text" placeholder="Name...">
+                        <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
+                        <button name="addMember" type="submit">Add Member</button>
+                    </form>
+                </li>
+                <?php
+                // error messages for both add and delete members
+                if (isset($_GET["error"])) {
+                    switch ($_GET["error"]) {
+                        case "emptyinputm":
+                            echo "<p>Fill in the name!</p>";
+                            break;
+                        case "stmt5failed":
+                        case "exe5failed":
+                        case "stmt6failed":
+                        case "exe6failed":
+                            echo "<p>Something went wrong! Please try again.</p>";
+                            break;
+                        case "none2":
+                        case "none3":
+                            echo "<p>Successfully updated.</p>";
+                    }
+                }
+                ?>
             </ol>
         </div>
-        <!-- placement of save changes button might be confusing, think of a better layout -->
     </div>
+    <a href="clubPage.php?club=<?php echo $clubsID; ?>"><button style="float: right">Back to View Only Page</button></a>
+    <br />
 </section>
 <?php include_once 'footer.php'; ?>

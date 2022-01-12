@@ -59,34 +59,40 @@ function usedInvCode($conn, $invCode)
     mysqli_stmt_close($stmt);
     return $usedInvCode;
 }
-/* check if the inv code is expired
-function expiredInvCode($conn, $invCode){
-    $expiredInvCode = true;
+// check if the inv code is expired
+/*
+function expiredInvCode($conn, $invCode)
+{
     $sql = "SELECT invitationCodesCreationTime FROM invitationCodes WHERE invitationCodesID = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../enterInvCode.php?error=stmtfailed");
         exit();
     }
-
     mysqli_stmt_bind_param($stmt, "i", $invCode);
-    if(!mysqli_stmt_execute($stmt)){
+    if (!mysqli_stmt_execute($stmt)) {
         header("location: ../enterInvCode.php?error=exefailed");
         //&invcode=" . $invCode
         exit();
     }
-
     $result = mysqli_stmt_get_result($stmt);
-
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
-        
+        $creationTime = $row["invitationCodesCreationTime"];
+
+        $sql1 = "SELECT TIMESTAMPDIFF (HOUR, '$creationTime', NOW);";
+        $result1 = mysqli_query($conn, $sql1);
+        if (mysqli_num_rows($result1) == 1) {
+            $row1 = mysqli_fetch_assoc($result1);
+            $timeDiff = $row1["TIMESTAMPDIFF"];
+            if ($timeDiff <= 24) {
+                return false;
+            }
+        }
     }
-
-    mysqli_stmt_close($stmt);
-
-    return $expiredInvCode;
-}*/
+    return true;
+}
+*/
 function validInvCode($invCode)
 {
     header("location: ../createAccount.php?invCode=" . $invCode);
@@ -182,7 +188,7 @@ function loginUser($conn, $uid, $pwd)
             $row = mysqli_fetch_assoc($result);
             $_SESSION["userRole"] = $row["invitationCodesAccountType"];
         }
-        header("location: ../main_page.php");
+        header("location: ../index.php");
         exit();
     }
 }
@@ -190,16 +196,15 @@ function emptyInputClubPage($id, $title)
 {
     return empty($id) || empty($title);
 }
-function updateClubPage($conn, $id, $title, $description, $contact, $media)
+function updateClubPage($conn, $id, $title, $description, $contact)
 {
-    $sql = "UPDATE clubs SET clubsTitle=?, clubsDescription=?, clubsContactInfo=?, clubsMedia=? WHERE clubsID=?;";
+    $sql = "UPDATE clubs SET clubsTitle=?, clubsDescription=?, clubsContactInfo=? WHERE clubsID=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../clubPageUser.php?club=" . $id . "&error=stmtfailed");
         exit();
     }
-    //what is datatype for blob??
-    mysqli_stmt_bind_param($stmt, "sssbi", $title, $description, $contact, $media, $id);
+    mysqli_stmt_bind_param($stmt, "sssi", $title, $description, $contact, $id);
     if (!mysqli_stmt_execute($stmt)) {
         header("location: ../clubPageUser.php?club=" . $id . "&error=exefailed");
         exit();
@@ -207,6 +212,45 @@ function updateClubPage($conn, $id, $title, $description, $contact, $media)
     mysqli_stmt_close($stmt);
     header("location: ../clubPageUser.php?club=" . $id . "&error=none");
     exit();
+}
+function deleteClubMedia($conn, $id)
+{
+    $sql = "SELECT clubsMedia FROM clubs WHERE clubsID=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    if (!mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $path = "../img/" . $row["clubsMedia"];
+        mysqli_stmt_close($stmt);
+        return unlink($path);
+    }
+    mysqli_stmt_close($stmt);
+    return false;
+}
+function updateClubMedia($conn, $id, $media)
+{
+    $sql = "UPDATE clubs SET clubsMedia=? WHERE clubsID=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        mysqli_stmt_close($stmt);
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "si", $media, $id);
+    if (!mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_close($stmt);
+        return false;
+    };
+    mysqli_stmt_close($stmt);
+    return true;
 }
 //works if suggestions and members are empty
 function deleteClubPage($conn, $id)
@@ -250,7 +294,7 @@ function deleteClubPage($conn, $id)
     };
     mysqli_stmt_close($stmt3);
 
-    header("location: ../main_page.php?error=none");
+    header("location: ../index.php?&error=none");
     exit();
 }
 function deleteSuggestion($conn, $suggestionID, $clubID)
@@ -318,7 +362,6 @@ function verifyPwd($conn, $uid, $pwd)
     }
     return false;
 }
-//doesn't change the usersPwd?
 function changePwd($conn, $uid, $newPwd)
 {
     $sql = "UPDATE users SET usersPwd = ? WHERE usersUid = ?;";
@@ -326,6 +369,7 @@ function changePwd($conn, $uid, $newPwd)
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../changePwd.php?error=stmt7failed");
+        //change this to profile.php
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss", $hashedPwd, $uid);
@@ -334,6 +378,7 @@ function changePwd($conn, $uid, $newPwd)
         exit();
     };
     mysqli_stmt_close($stmt);
-    header("location: ../userProfile.php?error=none");
+    header("location: ../index.php?error=none");
+    //change to main_page.php
     exit();
 }
