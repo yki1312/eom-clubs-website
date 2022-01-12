@@ -13,7 +13,7 @@ if (!isset($_GET["invCode"]) && !isset($_GET["error"])) {
         <input type="password" name="pwd" placeholder="Password..." required>
         <label for="rePwd">Confirm your password:</label>
         <input type="password" name="rePwd" placeholder="Repeat Password..." required>
-        <input type="hidden" name="invCode" value="<?php echo $_GET["invCode"]; ?>">
+        <input type="hidden" name="invCode" value='<?php echo $_GET["invCode"]; ?>'>
         <button type="submit" name="submit">Create Account</button>
     </form>
     <?php

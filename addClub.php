@@ -1,5 +1,12 @@
 <?php include_once 'header.php'?>
 
+<!-- Now we are in add a club form. Where the users can create a new club. They have to enter the 
+club's name, contact information and description. Here as well I have limited their character length to 
+the chracter length specified in our database to avoid crashes or confusion. -->
+
+<!-- This is also where I have already added the error handling by using the required keyword. This keyword
+restricts the user from going ahead if they haven't entered the previous information. -->
+
 <h2>Add a Club Form</h2>
 <section>
     <p><span class="error">* required fields</span></p>

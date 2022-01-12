@@ -3,6 +3,9 @@
         <br>
         <h2>Your Profile</h2>
         <br>
+    <!-- This is the user profile page where first I have searched for the invitation codes and the
+    corresponding account types for the user who is logged in. 
+    This information is needed to display to the user logged in.-->
     <?php
         $record = mysqli_query($conn,"SELECT usersInvCode FROM users WHERE usersId = {$_SESSION["userId"]}");
         if (mysqli_num_rows($record) == 1) {
@@ -13,7 +16,9 @@
             }
         } 
     ?>
-        <!--This needs to be so that other people cannot make changes to it.-->
+    
+        <!-- This is the actual form of where the user sees its infomation displayed in form of its
+        username, passoword, and their account type. -->
         <form> 
             <fieldset>
                 <legend>Your credentials:</legend>
@@ -33,7 +38,7 @@
                 <input type="text" id="ytype" name="ytype" value=<?php echo $user_role["invitationCodesAccountType"]?> readonly><br><br>
                 <br>
                 <a href="includes/logout.inc.php"><input type="button" value="Sign Out"></a>
-                <a href="changePassword.html"><input type="button" value="Change Password"></a>
+                <a href="changePwd.php"><input type="button" value="Change Password"></a>
             </fieldset>
         </form>
         
