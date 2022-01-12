@@ -23,7 +23,8 @@ if (isset($_POST["submit"])) {
         header("location: ../enterInvCode.php?error=usedinvcode");
         exit();
     }
-    /*    if (expiredInvCode($conn, $invCode) !== false){
+    /*$invCodeCreationTime = invCodeCreationTime($conn, $invCode);
+    if (expiredInvCode($conn, $invCodeCreationTime) !== false) {
         header("location: ../enterInvCode.php?error=expiredinvcode");
         exit();
     }*/

@@ -46,6 +46,7 @@ if (mysqli_num_rows($result) == 1) {
             case "emptyinput":
                 echo "<p>Fill the title of the club!</p>";
                 break;
+            case "errordeletingmedia":
             case "stmt1failed":
             case "exe1failed":
             case "stmt2failed":
@@ -65,7 +66,11 @@ if (mysqli_num_rows($result) == 1) {
         <input name="clubMedia" type="file">
         <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
         <button type="submit" name="upload">Upload Image</button>
-        <img src="img/<?php echo $media; ?>" width="300" height=auto>
+        <?php
+        if (isset($media)) {
+            echo "<img src=\"img/" . $media . "\" width=\"300\" height=auto>";
+        }
+        ?>
     </form>
     <?php
     if (isset($_GET["error"])) {

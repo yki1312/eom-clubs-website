@@ -59,9 +59,7 @@ function usedInvCode($conn, $invCode)
     mysqli_stmt_close($stmt);
     return $usedInvCode;
 }
-// check if the inv code is expired
-/*
-function expiredInvCode($conn, $invCode)
+function invCodeCreationTime($conn, $invCode)
 {
     $sql = "SELECT invitationCodesCreationTime FROM invitationCodes WHERE invitationCodesID = ?;";
     $stmt = mysqli_stmt_init($conn);
@@ -79,20 +77,26 @@ function expiredInvCode($conn, $invCode)
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $creationTime = $row["invitationCodesCreationTime"];
-
-        $sql1 = "SELECT TIMESTAMPDIFF (HOUR, '$creationTime', NOW);";
-        $result1 = mysqli_query($conn, $sql1);
-        if (mysqli_num_rows($result1) == 1) {
-            $row1 = mysqli_fetch_assoc($result1);
-            $timeDiff = $row1["TIMESTAMPDIFF"];
-            if ($timeDiff <= 24) {
-                return false;
-            }
+    } else {
+        header("location: ../enterInvCode.php?error=queryfailed");
+        exit();
+    }
+    mysqli_stmt_close($stmt);
+    return $creationTime;
+}
+function expiredInvCode($conn, $creationTime)
+{
+    $sql = "SELECT TIMESTAMPDIFF (HOUR, '$creationTime', CURRENT_TIMESTAMP);";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $timeDiff = $row["TIMESTAMPDIFF"];
+        if ($timeDiff <= 24) {
+            return false;
         }
     }
     return true;
 }
-*/
 function validInvCode($invCode)
 {
     header("location: ../createAccount.php?invCode=" . $invCode);
@@ -231,7 +235,8 @@ function deleteClubMedia($conn, $id)
         $row = mysqli_fetch_assoc($result);
         $path = "../img/" . $row["clubsMedia"];
         mysqli_stmt_close($stmt);
-        return unlink($path);
+        unlink($path);
+        return true;
     }
     mysqli_stmt_close($stmt);
     return false;
@@ -252,22 +257,8 @@ function updateClubMedia($conn, $id, $media)
     mysqli_stmt_close($stmt);
     return true;
 }
-//works if suggestions and members are empty
 function deleteClubPage($conn, $id)
 {
-    $sql1 = "DELETE FROM clubs WHERE clubsID=?;";
-    $stmt1 = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt1, $sql1)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt1failed");
-        exit();
-    }
-    mysqli_stmt_bind_param($stmt1, "i", $id);
-    if (!mysqli_stmt_execute($stmt1)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=exe1failed");
-        exit();
-    };
-    mysqli_stmt_close($stmt1);
-
     $sql2 = "DELETE FROM clubSuggestions WHERE clubSuggestionsClub=?;";
     $stmt2 = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt2, $sql2)) {
@@ -293,6 +284,24 @@ function deleteClubPage($conn, $id)
         exit();
     };
     mysqli_stmt_close($stmt3);
+
+    if (deleteClubMedia($conn, $id) !== true) {
+        header("location: ../clubPageUser.php?club=" . $id . "&error=errordeletingmedia");
+        exit();
+    }
+
+    $sql1 = "DELETE FROM clubs WHERE clubsID=?;";
+    $stmt1 = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt1, $sql1)) {
+        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt1failed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt1, "i", $id);
+    if (!mysqli_stmt_execute($stmt1)) {
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe1failed");
+        exit();
+    };
+    mysqli_stmt_close($stmt1);
 
     header("location: ../main_page.php?error=none");
     exit();
