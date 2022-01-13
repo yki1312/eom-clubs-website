@@ -32,7 +32,11 @@ if (mysqli_num_rows($result) == 1) {
     <div class="flex-container-v club-basic-info">
         <h2>Contact Information</h2>
         <p><?php echo $contact; ?></p>
-        <img src="img/<?php echo $media; ?>" width="300" height=auto>
+        <?php
+        if (isset($media)) {
+            echo "<img src=\"img/" . $media . "\" width=\"300\" height=auto>";
+        }
+        ?>
     </div>
 </section>
 <?php
