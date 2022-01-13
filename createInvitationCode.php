@@ -50,7 +50,7 @@
                 }
             }
         };
-        xhttp.open("GET", "InsertInvCodeInDB.php?code="+code+"&type="+result);
+        xhttp.open("GET", "includes/InsertInvCodeInDB.inc.php?code="+code+"&type="+result);
         xhttp.send();
     }
 </script>

@@ -24,7 +24,7 @@
         <tr>
             <td><?php echo $data['usersID']; ?></td>
             <td><?php echo $data['usersUid']; ?></td>
-            <td><a href="deleteUser.php?id=<?php echo $data['usersID']; ?>">Delete</a></td>
+            <td><a href="includes/deleteUser.inc.php?id=<?php echo $data['usersID']; ?>">Delete</a></td>
         </tr>	
         <?php
         }

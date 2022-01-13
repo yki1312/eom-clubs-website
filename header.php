@@ -14,7 +14,7 @@ session_start();
 <body>
     <header style="background-color: MediumSeaGreen">
         <img src=img/logo.png alt="Logo" width="200px" style="padding-top: 10px;">
-        <h1 class="bannerText">Earl of March Clubs</h1>
+        <center><h1 class="bannerText">Earl of March Clubs</h1></center>
     </header>
     <?php require 'includes/dbh.inc.php'; ?>
     <nav>
@@ -53,7 +53,7 @@ session_start();
         </ul>
     </nav>
     <!-- Created a date display to be output to the screen.-->
-    <p id="show_date" style="border:5px solid yellow" class="date"></p>
+    <p id="show_date" style="border:2px solid yellow;padding: 0px 8px" class="date"></p>
     <script>
         const d = new Date();
         document.getElementById("show_date").innerHTML = d.toDateString();

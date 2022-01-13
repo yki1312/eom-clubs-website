@@ -10,7 +10,7 @@ restricts the user from going ahead if they haven't entered the previous informa
 <h2>Add a Club Form</h2>
 <section>
     <p><span class="error">* required fields</span></p>
-    <form method="post" action="addClubInsert.php">  
+    <form method="post" action="includes/addClubInsert.inc.php">  
       Name of Club: <input type="text" name="clubName" maxlength = "100" required>
       <span class="error">*</span>
       <br><br>
