@@ -5,7 +5,7 @@ CREATE TABLE clubs (
     clubsTitle VARCHAR(100) NOT NULL,
     clubsDescription TEXT,
     clubsContactInfo TEXT,
-    clubsMedia VARCHAR(100),
+    clubsMedia BLOB,
     PRIMARY KEY (clubsID)
 );
 INSERT INTO clubs(clubsTitle, clubsDescription, clubsContactInfo) VALUES ('club 1', 'description of club 1', 'contact info of club 1');
@@ -26,7 +26,7 @@ CREATE TABLE clubSuggestions (
     clubSuggestionsID INT(11) AUTO_INCREMENT,
     clubSuggestionsContent TEXT NOT NULL,
     clubSuggestionsClub INT(3) NOT NULL,
-    clubSuggestionsCreationTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    clubSuggestionsCreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (clubSuggestionsID),
     FOREIGN KEY (clubSuggestionsClub) REFERENCES clubs(clubsID)
 );
@@ -36,21 +36,34 @@ INSERT INTO clubSuggestions(clubSuggestionsContent, clubSuggestionsClub) VALUES 
 
 CREATE TABLE invitationCodes (
     invitationCodesID INT(11),
-    invitationCodesCreationTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    invitationCodesCreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     invitationCodesAccountType VARCHAR(7) DEFAULT 'student',
     PRIMARY KEY (invitationCodesID)
 );
 INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (12345, 'teacher');
 INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (67890, 'student');
+INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (23456, 'student');
+INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (45678, 'student');
+INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (897899, 'teacher');
+INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (102345, 'student');
+SELECT * FROM invitationcodes;
 
 CREATE TABLE users (
     usersID INT(11) AUTO_INCREMENT,
-    usersUid VARCHAR(50) UNIQUE NOT NULL,
+    usersUid VARCHAR(50) NOT NULL,
     usersPwd VARCHAR(255) NOT NULL,
     usersInvCode INT(11) NOT NULL,
-    usersCreationTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    usersCreationTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (usersID),
     FOREIGN KEY (usersInvCode) REFERENCES invitationCodes(invitationCodesID)
 );
+DROP TABLE users;
+INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Student one', '23456', 23456);
+INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Student two', '45678', 45678);
+DELETE FROM users WHERE usersID=6;
+DELETE FROM users WHERE usersID=7;
+SELECT * FROM users;
+
+
 INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Teacher Example', '12345', 12345);
 INSERT INTO users(usersUid, usersPwd, usersInvCode) VALUES ('Student Example', '67890', 67890);
