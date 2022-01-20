@@ -8,13 +8,16 @@ session_start();
     <title> EoM Clubs Website </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="altstylesheet.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 
 <body>
     <header style="background-color: MediumSeaGreen">
         <img src=img/logo.png alt="Logo" width="200px" style="padding-top: 10px;">
-        <center><h1 class="bannerText">Earl of March Clubs</h1></center>
+        <center>
+            <h1 class="bannerText">Earl of March Clubs</h1>
+        </center>
     </header>
     <?php require 'includes/dbh.inc.php'; ?>
     <nav>
@@ -34,7 +37,7 @@ session_start();
                 </div>
             </li>
             <li><a href="suggestions.php">Suggestions Page</a></li>
-            <li><a href="EOMpage.php">EOM Clubs Page</a></li>
+            <li><a href="EOMpage.php">About Us</a></li>
 
             <li class="dropdown">
                 <?php
