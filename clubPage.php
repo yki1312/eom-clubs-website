@@ -33,7 +33,7 @@ if (mysqli_num_rows($result) == 1) {
         <h2>Contact Information</h2>
         <p><?php echo $contact; ?></p>
         <?php
-        if (isset($media)) {
+        if (strlen($media) != 0) {
             echo "<img src=\"img/" . $media . "\" width=\"300\" height=auto>";
         }
         ?>

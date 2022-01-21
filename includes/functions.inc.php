@@ -86,14 +86,12 @@ function invCodeCreationTime($conn, $invCode)
 }
 function expiredInvCode($conn, $creationTime)
 {
-    $sql = "SELECT TIMESTAMPDIFF (HOUR, '$creationTime', CURRENT_TIMESTAMP);";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $timeDiff = $row["TIMESTAMPDIFF"];
-        if ($timeDiff <= 24) {
-            return false;
-        }
+    $now = time();
+    $creation = strtotime($creationTime);
+    $diff = $now - $creation;
+    //seconds in a day
+    if ($diff <= 86400) {
+        return false;
     }
     return true;
 }
@@ -109,7 +107,6 @@ function emptyInputSignup($uid, $pwd, $rePwd, $invCode)
 function invalidUID($uid)
 {
     $result = true;
-    //maybe reconsider the characters allowed (allow for email symbols as well??)
     if (preg_match("/^[a-zA-Z0-9]*$/", $uid)) {
         $result = true;
         return $result;

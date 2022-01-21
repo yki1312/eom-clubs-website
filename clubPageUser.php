@@ -67,7 +67,7 @@ if (mysqli_num_rows($result) == 1) {
         <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
         <button type="submit" name="upload">Upload Image</button>
         <?php
-        if (isset($media)) {
+        if (strlen($media) != 0) {
             echo "<img src=\"img/" . $media . "\" width=\"300\" height=auto>";
         }
         ?>
