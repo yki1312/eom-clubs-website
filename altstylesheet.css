@@ -1,3 +1,9 @@
+/*body::before {
+  display: block;
+  content: "";
+  height: 100px;
+} */
+
 /* Flexbox */
 @media (min-width: 768px) {
   .flex-container-h {
