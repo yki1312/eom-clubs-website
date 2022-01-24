@@ -1,3 +1,34 @@
 # Earl of March Clubs Website
 
 ICS4U term project by Ambika and Yuki.
+
+1. Prerequite softwares required: 
+    a) XAMPP - Version 8.0.13
+    Download Link: https://www.apachefriends.org/download.html 
+
+    Installation : After downloading the link you will be brought to the set-up page where you can decide what you want to set up. For now you can just set up Apache Web Server. 
+    
+    Run: Then after setting it up you can run the XAMPP to see how it works. Start your browser and type http://127.0.0.1 or http://localhost in the location bar. You should see our pre-made start page with certain examples and test screens.
+
+    b) MySQL - Version 8.0
+    Download and Installation Link for Windows: https://dev.mysql.com/downloads/installer/   
+    Configure: You can configure and update your settings in the "db.inc.php" file. 
+    User should change the following input variables in file "db.inc.php" as per the Sql Server config on their device.
+        $serverName = "localhost:3306";
+        $dBUsername = "root";
+        $dBPassword = "";
+      
+    Run: After setting it up, you can run the MySQL application.
+
+2. Pull EOM Club website code from GIT to the "htdocs" folder of XAMPP
+    GIT URL: https://github.com/yki1312/eom-clubs-website 
+
+3. SQL Database Creation for Website
+    Run databaseFile.txt in MySQl Workbench application to load the database tables - This step is a one time setup.
+    The database is not synced because it runs on our local computer - localhost.
+    But you can test the features and then but just note that the database may not be the same.
+
+4. Create First Invitation code in the database?
+
+5. Access the EOM Club website main page
+   URL: http://localhost:8080/EOM_WEBSITE/eom-clubs-2/main_page.php 

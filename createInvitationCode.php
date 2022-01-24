@@ -1,4 +1,6 @@
 <?php include_once 'header.php'?>
+
+<!--This is the actual form where I ask the users who are TEACHERS to generate a new invitation code. -->
 <div id="main_layout">
     <center>
         <h2>Create Invitation Code Page</h2>
@@ -24,6 +26,9 @@
     </center>
 </div>
 
+<!-- This is where the random generation of code occurs in the randomCode function. 
+Since we are working in JS we must find a way for us to communicate to PHP to insert the new code in the 
+database.-->
 <script>
     function randomCode() {
         let code = Math.floor((Math.random() * 100000) + 10000);
@@ -38,7 +43,9 @@
                result = ele[i].value;
             }
         }
-
+        
+        // Here is the method we use to communicate to PHP using PHP AJAX functionality. 
+        // We create a an XMLHttpRequest object and us conditions to verify what we have received. 
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -50,6 +57,8 @@
                 }
             }
         };
+        // Here is where we specify what method to send the request, where to send the request and what 
+        // would the content be.
         xhttp.open("GET", "includes/InsertInvCodeInDB.inc.php?code="+code+"&type="+result);
         xhttp.send();
     }

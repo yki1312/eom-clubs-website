@@ -27,18 +27,12 @@ restricts the user from going ahead if they haven't entered the previous informa
 <?php
 if (isset($_GET["error"])) {
   switch ($_GET["error"]) {
-    case "emptyclubName":
-      echo "<p> <font color=red>Please enter the club name.</font></p>";
-      break;
-    case "emptycontact":
-      echo "<p> <font color=red>Please input the contact information.</font> </p>";
-      break;
-    case "emptydescription":
-      echo "<p> <font color=red>Please input the description.</font> </p> ";
-      break;
     case "none":
-      echo "<p> <font color=green>You've successfully added a club!</font> </p> ";
-}
+      echo "<p><font color=green>You've successfully added a club!</font> </p> ";
+    case "clubExist":
+      echo "<p><font color=red>This club already exists. Please try a different name!</font> </p> ";
+      break;
+  }
 }
 
 ?>
