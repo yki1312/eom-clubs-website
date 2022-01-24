@@ -139,7 +139,7 @@ li a,
 
 .addClub {
   position: absolute;
-  top: 250px;
+  top: 270px;
   right: 700px;
   padding: 15px;
 }
@@ -203,66 +203,13 @@ hr.rounded {
 
 .userSearch {
   position: absolute;
-  top: 250px;
+  top: 270px;
   right: 400px;
 }
 
-/* Flexbox */
-@media (min-width: 768px) {
-  .flex-container-h {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    /* border: 1px solid black; */
-    margin: 10px;
-  }
-  .club-basic-info {
-    flex: 1;
-  }
-  .club-suggestions {
-    flex: 2;
-  }
-  .club-member-list {
-    flex: 1;
-  }
-}
-.flex-container-v {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  /* border: 1px solid black; */
-  margin: 10px;
-}
-.flex-container-h-nmq {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  /* border: 1px solid black; */
-  margin: 10px;
-}
-.login-button {
-  flex-basis: 50%;
-}
-#club-title {
-  flex: 4;
-}
-#club-edit-button {
-  flex: 1;
-}
-
-/* Club user page label */
-.club-label {
-  font-family: "Times New Roman", Times, serif;
-  color: black;
-  font-size: 25px;
-  font-weight: bold;
-}
 
 /* Style the Image Used to Trigger the Modal */
-#myImg {
+#myImg, #myImg1 {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
@@ -271,7 +218,7 @@ hr.rounded {
 #myImg:hover {opacity: 0.7;}
 
 /* The Modal (background) */
-.modal {
+.modal, .modal2 {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -294,7 +241,7 @@ hr.rounded {
 }
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
-#caption {
+#caption, #caption2 {
   margin: auto;
   display: block;
   width: 80%;
@@ -306,7 +253,7 @@ hr.rounded {
 }
 
 /* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
+.modal-content, #caption, #caption2 {
   animation-name: zoom;
   animation-duration: 0.6s;
 }
@@ -317,7 +264,7 @@ hr.rounded {
 }
 
 /* The Close Button */
-.close {
+.close, .close2 {
   position: absolute;
   top: 15px;
   right: 35px;
@@ -328,7 +275,9 @@ hr.rounded {
 }
 
 .close:hover,
-.close:focus {
+.close:focus,
+.close2:hover,
+.close2:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;

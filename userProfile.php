@@ -17,8 +17,8 @@
         } 
     ?>
     
-        <!-- This is the actual form of where the user sees its infomation displayed in form of its
-        username, passoword, and their account type. -->
+        <!-- This is the actual form of where the user sees its infomation displayed of its
+        username, and their account type. -->
         <form> 
             <fieldset>
                 <legend>Your credentials:</legend>
@@ -28,10 +28,6 @@
                 <br>
                 <input type="text" id="ytext" name="ytext" value=<?php echo $_SESSION["userUid"]?> readonly><br>
                 <br>
-                <br>
-                <label for="ypass">Your password:</label><br>
-                <br>
-                <input type="password" id="ypass" name="ypass" value="**********" readonly><br><br>
                 <br>
                 <label for="ytype">Account Type:</label><br>
                 <br>

@@ -36,7 +36,7 @@ session_start();
                     ?>
                 </div>
             </li>
-            <li><a href="suggestions.php">Suggestions Page</a></li>
+            <li><a href="suggestions.php">Suggestions</a></li>
             <li><a href="EOMpage.php">About Us</a></li>
 
             <li class="dropdown">
