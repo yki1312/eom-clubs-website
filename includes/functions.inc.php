@@ -1,5 +1,4 @@
 <?php
-//write character limiter for login, create account, enter inv code (in invalid inv code function), club page edit
 function emptyInputInvCode($invCode)
 {
     return empty($invCode);
@@ -12,7 +11,6 @@ function invalidInvCode($invCode)
         $result = false;
         return $result;
     }
-    // add code block here to check the length of $invCode (make sure it's 11 characters)
     return $result;
 }
 function invCodeExists($conn, $invCode)
@@ -27,7 +25,6 @@ function invCodeExists($conn, $invCode)
     mysqli_stmt_bind_param($stmt, "i", $invCode);
     if (!mysqli_stmt_execute($stmt)) {
         header("location: ../enterInvCode.php?error=exefailed");
-        // &invcode=" . $invCode
         exit();
     }
     $resultData = mysqli_stmt_get_result($stmt);
@@ -49,7 +46,6 @@ function usedInvCode($conn, $invCode)
     mysqli_stmt_bind_param($stmt, "i", $invCode);
     if (!mysqli_stmt_execute($stmt)) {
         header("location: ../enterInvCode.php?error=exefailed");
-        // &invcode=" . $invCode
         exit();
     }
     $result = mysqli_stmt_get_result($stmt);
@@ -70,7 +66,6 @@ function invCodeCreationTime($conn, $invCode)
     mysqli_stmt_bind_param($stmt, "i", $invCode);
     if (!mysqli_stmt_execute($stmt)) {
         header("location: ../enterInvCode.php?error=exefailed");
-        //&invcode=" . $invCode
         exit();
     }
     $result = mysqli_stmt_get_result($stmt);
@@ -104,29 +99,23 @@ function emptyInputSignup($uid, $pwd, $rePwd, $invCode)
 {
     return empty($uid) || empty($pwd) || empty($rePwd) || empty($invCode);
 }
-function invalidUID($uid)
-{
-    $result = true;
-    if (preg_match("/^[a-zA-Z0-9]*$/", $uid)) {
-        $result = true;
-        return $result;
-    }
-    return $result;
-}
-function uidExists($conn, $uid)
+function uidExists($conn, $uid, $isLogin)
 {
     $sql = "SELECT * FROM users WHERE usersUid = ?;";
     $stmt = mysqli_stmt_init($conn);
-    //currently if error redirected from createAccount, no inv code included in get
-    //also always redirected to creatAccount.php, even if this is executed in login.php
     if (!mysqli_stmt_prepare($stmt, $sql)) {
+        if ($isLogin) {
+            header("location: ../login.php?error=stmtfailed");
+        }
         header("location: ../createAccount.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "s", $uid);
     if (!mysqli_stmt_execute($stmt)) {
+        if ($isLogin) {
+            header("location: ../login.php?error=exefailed");
+        }
         header("location: ../createAccount.php?error=exefailed");
-        //&uid=" . $uid
         exit();
     }
     $resultData = mysqli_stmt_get_result($stmt);
@@ -168,7 +157,7 @@ function emptyInputLogin($uid, $pwd)
 }
 function loginUser($conn, $uid, $pwd)
 {
-    $uidExists = uidExists($conn, $uid);
+    $uidExists = uidExists($conn, $uid, true);
     if ($uidExists === false) {
         header("location: ../login.php?error=nomatchinguid");
         exit();
@@ -211,7 +200,7 @@ function updateClubPage($conn, $id, $title, $description, $contact)
         exit();
     };
     mysqli_stmt_close($stmt);
-    header("location: ../clubPageUser.php?club=" . $id . "&error=none");
+    header("location: ../clubPageUser.php?club=" . $id . "&error=none#basicInfo");
     exit();
 }
 function deleteClubMedia($conn, $id)
@@ -259,12 +248,12 @@ function deleteClubPage($conn, $id)
     $sql2 = "DELETE FROM clubSuggestions WHERE clubSuggestionsClub=?;";
     $stmt2 = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt2, $sql2)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt2failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt2failed#basicInfo");
         exit();
     }
     mysqli_stmt_bind_param($stmt2, "i", $id);
     if (!mysqli_stmt_execute($stmt2)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=exe2failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe2failed#basicInfo");
         exit();
     };
     mysqli_stmt_close($stmt2);
@@ -272,30 +261,30 @@ function deleteClubPage($conn, $id)
     $sql3 = "DELETE FROM clubMembers WHERE clubMembersClub=?;";
     $stmt3 = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt3, $sql3)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt3failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt3failed#basicInfo");
         exit();
     }
     mysqli_stmt_bind_param($stmt3, "i", $id);
     if (!mysqli_stmt_execute($stmt3)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=exe3failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe3failed#basicInfo");
         exit();
     };
     mysqli_stmt_close($stmt3);
 
     if (deleteClubMedia($conn, $id) !== true) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=errordeletingmedia");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=errordeletingmedia#basicInfo");
         exit();
     }
 
     $sql1 = "DELETE FROM clubs WHERE clubsID=?;";
     $stmt1 = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt1, $sql1)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt1failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt1failed#basicInfo");
         exit();
     }
     mysqli_stmt_bind_param($stmt1, "i", $id);
     if (!mysqli_stmt_execute($stmt1)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=exe1failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe1failed#basicInfo");
         exit();
     };
     mysqli_stmt_close($stmt1);
@@ -308,16 +297,16 @@ function deleteSuggestion($conn, $suggestionID, $clubID)
     $sql = "DELETE FROM clubSuggestions WHERE clubSuggestionsID=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../clubPageUser.php?club=" . $clubID . "&error=stmt4failed");
+        header("location: ../clubPageUser.php?club=" . $clubID . "&error=stmt4failed#suggestionAndMember");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "i", $suggestionID);
     if (!mysqli_stmt_execute($stmt)) {
-        header("location: ../clubPageUser.php?club=" . $clubID . "&error=exe4failed");
+        header("location: ../clubPageUser.php?club=" . $clubID . "&error=exe4failed#suggestionAndMember");
         exit();
     };
     mysqli_stmt_close($stmt);
-    header("location: ../clubPageUser.php?club=" . $clubID . "&error=none1");
+    header("location: ../clubPageUser.php?club=" . $clubID . "&error=none1#suggestionAndMember");
     exit();
 }
 function addMember($conn, $name, $id)
@@ -325,16 +314,16 @@ function addMember($conn, $name, $id)
     $sql = "INSERT INTO clubMembers(clubMembersName, clubMembersClub) VALUES(?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt5failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=stmt5failed#suggestionAndMember");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "si", $name, $id);
     if (!mysqli_stmt_execute($stmt)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=exe5failed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exe5failed#suggestionAndMember");
         exit();
     };
     mysqli_stmt_close($stmt);
-    header("location: ../clubPageUser.php?club=" . $id . "&error=none2");
+    header("location: ../clubPageUser.php?club=" . $id . "&error=none2#suggestionAndMember");
     exit();
 }
 function deleteMember($conn, $memberID, $clubID)
@@ -342,21 +331,21 @@ function deleteMember($conn, $memberID, $clubID)
     $sql = "DELETE FROM clubMembers WHERE clubMembersID=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../clubPageUser.php?club=" . $clubID . "&error=stmt6failed");
+        header("location: ../clubPageUser.php?club=" . $clubID . "&error=stmt6failed#suggestionAndMember");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "i", $memberID);
     if (!mysqli_stmt_execute($stmt)) {
-        header("location: ../clubPageUser.php?club=" . $clubID . "&error=exe6failed");
+        header("location: ../clubPageUser.php?club=" . $clubID . "&error=exe6failed#suggestionAndMember");
         exit();
     };
     mysqli_stmt_close($stmt);
-    header("location: ../clubPageUser.php?club=" . $clubID . "&error=none3");
+    header("location: ../clubPageUser.php?club=" . $clubID . "&error=none3#suggestionAndMember");
     exit();
 }
 function verifyPwd($conn, $uid, $pwd)
 {
-    $uidExists = uidExists($conn, $uid);
+    $uidExists = uidExists($conn, $uid, false);
     if ($uidExists === false) {
         header("location: ../changePwd.php?error=nomatchinguid");
         exit();
@@ -374,12 +363,12 @@ function changePwd($conn, $uid, $newPwd)
     $hashedPwd = password_hash($newPwd, PASSWORD_DEFAULT);
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../changePwd.php?error=stmt7failed");
+        header("location: ../changePwd.php?error=stmt7failed#media");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss", $hashedPwd, $uid);
     if (!mysqli_stmt_execute($stmt)) {
-        header("location: ../changePwd.php?error=exe7failed");
+        header("location: ../changePwd.php?error=exe7failed#media");
         exit();
     };
     mysqli_stmt_close($stmt);

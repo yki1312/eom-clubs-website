@@ -14,7 +14,6 @@ if (mysqli_num_rows($result) == 1) {
     }
 }
 ?>
-
 <section class="p-5">
     <div class="container">
         <div class="row">
@@ -48,32 +47,34 @@ if (mysqli_num_rows($result) == 1) {
         </div>
     </div>
 </section>
-<?php
-if (isset($_SESSION["userUid"])) {
-    echo "<section class=\"p-5\">";
-    echo "<div class=\"container\">";
-    echo "<div class=\"row\">";
-    echo "<div class=\"col-md\">";
-    echo "<h5>Suggestions</h5>";
-    $sql = "SELECT clubSuggestionsContent, clubSuggestionsCreationTime FROM clubSuggestions WHERE clubSuggestionsClub=$clubsID ORDER BY clubSuggestionsID DESC;";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<div><br/><p>Written at: " . $row["clubSuggestionsCreationTime"] . "</p><p>" . $row["clubSuggestionsContent"] . "</p></div>";
+<section>
+    <?php
+    if (isset($_SESSION["userUid"])) {
+        echo "<section class=\"p-5\">";
+        echo "<div class=\"container\">";
+        echo "<div class=\"row\">";
+        echo "<div class=\"col-md\">";
+        echo "<h5>Suggestions</h5>";
+        $sql = "SELECT clubSuggestionsContent, clubSuggestionsCreationTime FROM clubSuggestions WHERE clubSuggestionsClub=$clubsID ORDER BY clubSuggestionsID DESC;";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div><br/><p>Written at: " . $row["clubSuggestionsCreationTime"] . "</p><p>" . $row["clubSuggestionsContent"] . "</p></div>";
+            }
         }
-    }
-    echo "<br/></div>";
-    echo "<div class=\"col-md\">";
-    echo "<h5>Members</h5>";
-    echo "<ol>";
-    $sql = "SELECT clubMembersName FROM clubMembers WHERE clubMembersClub=$clubsID ORDER BY clubMembersName;";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<br/><li>" . $row["clubMembersName"] . "</li>";
+        echo "<br/></div>";
+        echo "<div class=\"col-md\">";
+        echo "<h5>Members</h5>";
+        echo "<ol>";
+        $sql = "SELECT clubMembersName FROM clubMembers WHERE clubMembersClub=$clubsID ORDER BY clubMembersName;";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<br/><li>" . $row["clubMembersName"] . "</li>";
+            }
         }
+        echo "</ol></div></div></div></section>";
     }
-    echo "</ol></div></div></div></section>";
-}
-?>
+    ?>
+</section>
 <?php include_once 'footer.php'; ?>

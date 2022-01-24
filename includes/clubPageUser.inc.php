@@ -7,7 +7,7 @@ if (isset($_POST["save"])) {
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
     if (emptyInputClubPage($id, $title)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=emptyinput");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=emptyinput#basicInfo");
         exit();
     }
     updateClubPage($conn, $id, $title, $description, $contact);
@@ -30,24 +30,23 @@ if (isset($_POST["save"])) {
             require_once 'dbh.inc.php';
             require_once 'functions.inc.php';
             if (move_uploaded_file($fileTmpName, $fileDestination) && deleteClubMedia($conn, $id) && updateClubMedia($conn, $id, $fileNewName)) {
-                header("location: ../clubPageUser.php?club=" . $id . "&error=uploadsuccess");
+                header("location: ../clubPageUser.php?club=" . $id . "&error=uploadsuccess#media");
             } else {
-                header("location: ../clubPageUser.php?club=" . $id . "&error=errorupload");
+                header("location: ../clubPageUser.php?club=" . $id . "&error=errorupload#media");
                 exit();
             }
         } else {
-            header("location: ../clubPageUser.php?club=" . $id . "&error=errorupload");
+            header("location: ../clubPageUser.php?club=" . $id . "&error=errorupload#media");
             exit();
         }
     } else {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=disallowedtype");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=disallowedtype#media");
         exit();
     }
 } else if (isset($_POST["delete"])) {
     $id = $_POST["clubID"];
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
-    //this doesn't work?
     deleteClubPage($conn, $id);
 } else if (isset($_POST["deleteSuggestion"])) {
     $suggestionID = $_POST["suggestionID"];
@@ -61,7 +60,7 @@ if (isset($_POST["save"])) {
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
     if (emptyInputClubPage($id, $name)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=emptyinputm");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=emptyinputm#suggestionAndMember");
         exit();
     }
     addMember($conn, $name, $id);
