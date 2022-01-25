@@ -29,10 +29,10 @@ if (mysqli_num_rows($result) == 1) {
             </div>
             <br />
             <div><label for="clubDescription" class="form-label">Club Description</label></div>
-            <div><textarea name="clubDescription" class="form-control" rows="8"><?php echo $description; ?></textarea></div>
+            <div><textarea name="clubDescription" class="form-control" rows="6"><?php echo $description; ?></textarea></div>
             <br />
             <div><label for="clubContact" class="form-label">Contact Information</label></div>
-            <div><textarea name="clubContact" class="form-control" rows="8"><?php echo $contact; ?></textarea></div>
+            <div><textarea name="clubContact" class="form-control" rows="4"><?php echo $contact; ?></textarea></div>
             <br />
             <input name="clubID" type="hidden" value="<?php echo $clubsID; ?>">
             <div>

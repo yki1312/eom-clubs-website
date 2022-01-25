@@ -30,12 +30,14 @@ if (mysqli_num_rows($result) == 1) {
                         ?>
                     </div>
                 </div>
-                <br />
-                <p><?php echo $description; ?></p>
+                <div style="white-space: pre-line;">
+                    <?php echo $description; ?>
+                </div>
                 <br />
                 <h5>Contact Information</h5>
-                <br />
-                <p><?php echo $contact; ?></p>
+                <div style="white-space: pre-line;">
+                    <?php echo $contact; ?>
+                </div>
             </div>
             <?php
             if (strlen($media) != 0) {

@@ -3,3 +3,11 @@
   content: "";
   height: 100px;
 } */
+
+.successColour {
+  color: green;
+}
+
+.errorColour {
+  color: red;
+}
