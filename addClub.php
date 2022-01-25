@@ -6,23 +6,24 @@ the chracter length specified in our database to avoid crashes or confusion. -->
 
 <!-- This is also where I have already added the error handling by using the required keyword. This keyword
 restricts the user from going ahead if they haven't entered the previous information. -->
-
-<h2>Add a Club Form</h2>
-<section>
-    <p><span class="error">* required fields</span></p>
-    <form method="post" action="includes/addClubInsert.inc.php">  
-      Name of Club: <input type="text" name="clubName" maxlength = "100" required>
-      <span class="error">*</span>
-      <br><br>
-      Contact Information: <input type="text" name="contact" maxlength = "500" required>
-      <span class="error">*</span>
-      <br><br>
-      Description: <textarea name="description" rows="5" cols="40" maxlength = "2000" required></textarea>
-      <span class="error">*</span>
-      <br><br>
-      <input type="submit" name="submit" value="Submit">  
-    </form>
-</section>
+<div class="container">
+  <h2>Add a Club Form</h2>
+  <section>
+      <p><span class="error">** required fields</span></p>
+      <form method="post" action="includes/addClubInsert.inc.php">
+        <div><label class="form-label">Name of Club **</label></div>  
+        <div class="col-5"><input type="text" class="form-control" name="clubName" maxlength = "100" required></div>
+        <br><br>
+        <div><label class="form-label">Contact Information **</label></div>
+        <div class="col-5"><input type="text" class="form-control" name="contact" maxlength = "500" required></div>
+        <br><br>
+        <div><label class="form-label">Description **</label></div>
+        <div class="col-5"><textarea name="description" class="form-control" rows="5" cols="40" maxlength = "2000" required></textarea></div>
+        <br>
+        <input type="submit" class="btn btn-primary" name="submit" value="Submit">  
+      </form>
+  </section>
+</div>
 
 <?php
 if (isset($_GET["error"])) {
@@ -36,7 +37,6 @@ if (isset($_GET["error"])) {
 }
 
 ?>
-
 
 <br>
 <br>

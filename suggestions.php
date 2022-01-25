@@ -2,6 +2,7 @@
 
     <br>
     <br>
+    <div class="container">
     <h2>Suggestions Page</h2>
     <br>
 
@@ -30,9 +31,10 @@
 
         <label>Type Your Suggestion Here:</label><br>
         <br>
-        <textarea cols="5" rows="40" name="comments" maxlength = "2000" id="textClub"></textarea><br>
-        <input type="submit" name="button" value="Submit"/>
+        <textarea cols="5" rows="40" class="form-control" name="comments" maxlength = "2000" id="textClub"></textarea><br>
+        <input type="submit" class="btn btn-primary" name="button" value="Submit">
     </form>
+    </div>
 
 
     <!-- This where the error handling occurs. There are 3 cases to consider - if the club slection is left empty

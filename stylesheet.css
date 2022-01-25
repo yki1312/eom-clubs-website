@@ -8,10 +8,9 @@ p {
 .bannerText {
   font-family: "Times New Roman", Times, serif;
   color: rgb(235, 235, 65);
-  font-size: 30px;
-  background-color: MediumSeaGreen;
-  text-align: justify;
-  display: inline;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 200%;
 }
 
 header {
@@ -113,10 +112,10 @@ li a,
   background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 15px 12px;
-  position: absolute;
+  position: absolute; 
   border: 2px solid red;
-  top: 20px;
-  right: 15px;
+  top: 170px;
+  right: 20px;
 }
 
 /*#myUL {
@@ -139,7 +138,7 @@ li a,
 
 .addClub {
   position: absolute;
-  top: 270px;
+  top: 170px;
   right: 700px;
   padding: 15px;
 }
@@ -154,14 +153,10 @@ li a,
   text-align: left;
 }
 
-nav {
-  position: sticky;
-}
-
 .date {
   position: absolute;
   color: black;
-  top: 70px;
+  top: 90px;
   right: 90px;
 }
 
@@ -203,7 +198,7 @@ hr.rounded {
 
 .userSearch {
   position: absolute;
-  top: 270px;
+  top: 170px;
   right: 400px;
 }
 

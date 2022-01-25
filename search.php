@@ -1,9 +1,10 @@
 <?php include_once 'header.php'?>
 
-<h2>Search Page</h2>
+
 
 <!-- This is where the search sting comes in when pressed the search button.-->
-<div class="clubs-container">
+<div class="container">
+    <h2>Search Page</h2>
     <?php
         if(isset($_POST['submit-search'])) { // The if statement checks whether the person has hit search.
             $search = mysqli_real_escape_string($conn, $_POST['search']); // This line trims and characters which seem suspicious to keep it safe.
@@ -20,7 +21,7 @@
                     </div>"; 
                 }
             } else {
-                echo "There are no results matching your search!";
+                echo "There are no results matching your search! Please try again!";
             }
         }
 

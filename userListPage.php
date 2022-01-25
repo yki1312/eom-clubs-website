@@ -2,6 +2,7 @@
 
     <br>
     <br>
+    <div class="container">
     <h2>Users</h2>
 
     <br>
@@ -9,28 +10,36 @@
 
     <table table id="userTable">
         <tr>
-            <th>Sr.No.</th>
-            <th width="60%">Username</th>
-            <th>Delete User</th>
+            <th width="40%">Username</th>
+            <th width="40%">Delete User</th>
         </tr>
     
         <?php
-
         $records = mysqli_query($conn,"SELECT usersID, usersUid FROM users"); // fetch data from database
-
         while($data = mysqli_fetch_array($records)) {
             if($data['usersUid'] != $_SESSION["userUid"]) {
         ?>
+
         <tr>
-            <td><?php echo $data['usersID']; ?></td>
             <td><?php echo $data['usersUid']; ?></td>
-            <td><a href="includes/deleteUser.inc.php?id=<?php echo $data['usersID']; ?>">Delete</a></td>
+            <?php 
+                if ($_SESSION["userRole"] == "Student") {
+                echo "<td>----</td>";
+                }
+            ?>
+
+            <?php 
+                if ($_SESSION["userRole"] == "teacher") {
+                    echo "<td><a href=\"includes/deleteUser.inc.php?id=" . $data["usersID"] . "\">Delete</a></td>";
+                }
+            ?>
         </tr>	
         <?php
         }
         }
         ?>
     </table>
+    </div>
     
     <?php
         if (isset($_GET["error"])) {

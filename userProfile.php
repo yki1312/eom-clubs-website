@@ -19,6 +19,7 @@
     
         <!-- This is the actual form of where the user sees its infomation displayed of its
         username, and their account type. -->
+        <div class="container">
         <form> 
             <fieldset>
                 <legend>Your credentials:</legend>
@@ -33,10 +34,15 @@
                 <br>
                 <input type="text" id="ytype" name="ytype" value=<?php echo $user_role["invitationCodesAccountType"]?> readonly><br><br>
                 <br>
-                <a href="includes/logout.inc.php"><input type="button" value="Sign Out"></a>
-                <a href="changePwd.php"><input type="button" value="Change Password"></a>
+                <a href="includes/logout.inc.php"><input type="button" class="btn btn-outline-primary" value="Sign Out"></a>
+                <a href="changePwd.php"><input type="button" class="btn btn-outline-primary" value="Change Password"></a>
             </fieldset>
         </form>
+        </div>
+        <br>
+        <hr class="rounded">
+        <br>
+
         
     <?php include_once 'footer.php'?>
 
