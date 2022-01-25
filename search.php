@@ -7,7 +7,7 @@
     <h2>Search Page</h2>
     <?php
         if(isset($_POST['submit-search'])) { // The if statement checks whether the person has hit search.
-            $search = mysqli_real_escape_string($conn, $_POST['search']); // This line trims and characters which seem suspicious to keep it safe.
+            $search = trim($_POST['search']); // This line trims and characters which seem suspicious to keep it safe.
             $sql = "SELECT * FROM clubs WHERE clubsTitle LIKE '%$search%'"; // here it is searching for the keyword in the database like what is said in the search.
             $result = mysqli_query($conn, $sql);
             $queryResult = mysqli_num_rows($result);
@@ -16,7 +16,7 @@
             no search matching your result. */
             if ($queryResult > 0 ) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<div class='clubs-box'> 
+                    echo "<div> 
                         <ol><a href=\"clubPage.php?club=" . $row["clubsID"] . "\">" . $row["clubsTitle"] ."</a><br><ol> 
                     </div>"; 
                 }
@@ -28,6 +28,7 @@
     ?>
 </div>
 
+<a href="main_page.php"><input type="button" value="Back to Main Page" class="addClub"></a>
 
 <br>
 <br>
