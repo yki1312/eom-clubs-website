@@ -47,10 +47,10 @@
         if (isset($_GET["error"])) {
             switch ($_GET["error"]) {
                 case "errorUserDelete":
-                    echo "<p> <font color=red>Encountered error in deleting user.</font></p>";
+                    echo "<br><p class='container'><font color=red>Encountered error in deleting user.</font></p>";
                     break;
                 case "none":
-                    echo "<p> <font color=green>User was deleted successfully!</font> </p> ";
+                    echo "<br><p class='container'><font color=green>User was deleted successfully!</font> </p> ";
             }
         }
     ?>
