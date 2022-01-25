@@ -7,6 +7,8 @@
 
     <br>
     <br>
+    <br>
+    <br>
 
     <table table id="userTable">
         <tr>
@@ -57,12 +59,19 @@
     <br>
     <br>
 
-    <form class="userSearch">
+    <!--<form class="userSearch">
         <input type="text" name="search" onkeyup="searchFunction()" id="myInput" placeholder="Search user...">
     </form>
-    <br>
+    <br>-->
 
-    <script>
+    <form action="searchUser.php" method="POST" class="userSearch">
+        <div class="row">
+            <input type="text" name="search" class="form-control" placeholder="Search user..." ></input><br>
+            <button type="submit" class="btn-light" name="user-search">Search</button>
+        </div>
+    </form>
+
+    <!--<script>
         function searchFunction() {
             // Declare variables
             var input, filter, table, tr, td, i, txtValue;
@@ -84,7 +93,7 @@
             }
             }
         }
-    </script>
+    </script>-->
 
     
     <?php

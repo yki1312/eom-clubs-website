@@ -44,13 +44,13 @@
     if (isset($_GET["error"])) {
         switch ($_GET["error"]) {
             case "emptyclub":
-                echo "<p> <font color=red>Select the club!</font></p>";
+                echo "<br><p class='container'><font color=red>Select the club!</font></p>";
                 break;
                 case "emptysuggestion":
-                echo "<p> <font color=red> Please input the suggestion dialog box.</font> </p>";
+                echo "<br><p class='container'><font color=red> Please input the suggestion dialog box.</font> </p>";
                 break;
             case "none":
-                echo "<p> <font color=green>You've successfully entered suggestion!</font> </p> ";
+                echo "<br><p class='container'><font color=green>You've successfully entered suggestion!</font> </p> ";
         }
     }
     ?>

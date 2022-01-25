@@ -5,6 +5,7 @@
 <!-- This is where the search sting comes in when pressed the search button.-->
 <div class="container">
     <h2>Search Page</h2>
+    <br>
     <?php
         if(isset($_POST['submit-search'])) { // The if statement checks whether the person has hit search.
             $search = trim($_POST['search']); // This line trims and characters which seem suspicious to keep it safe.
@@ -28,7 +29,9 @@
     ?>
 </div>
 
-<a href="main_page.php"><input type="button" value="Back to Main Page" class="addClub"></a>
+<br>
+<br>
+<a href="main_page.php"><input type="button" class="btn btn-secondary" value="<- Back to Main Page" class="addClub"></a>
 
 <br>
 <br>
