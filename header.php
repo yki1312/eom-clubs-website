@@ -50,7 +50,7 @@ session_start();
                         echo "<ul class=\"dropdown-menu\" aria-labelledby=\"userDropdown\">";
                         echo "<li><a class=\"dropdown-item\" href=\"userProfile.php\">Your Profile</a></li>";
                         echo "<li><a class=\"dropdown-item\" href=\"userListPage.php\">User List</a></li>";
-                        echo "<li><a class=\"dropdown-item\" href=\"includes/logout.inc.php\">Log Out</a></li>";
+                        echo "<li><a class=\"dropdown-item\" href=\"includes/logout.inc.php\">Sign Out</a></li>";
                         echo "</ul></li>";
                     } else {
                         echo "<li class=\"nav-item\"><a href=\"login.php\" class=\"nav-link active\">Login</a></li>";

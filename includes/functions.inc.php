@@ -1,8 +1,10 @@
 <?php
+//checks if user input in enterInvCode.php is empty
 function emptyInputInvCode($invCode)
 {
     return empty($invCode);
 }
+// checks if the entered inv code only has number characters
 function invalidInvCode($invCode)
 {
     // preg_match() returns 1 or 0
@@ -13,6 +15,7 @@ function invalidInvCode($invCode)
     }
     return $result;
 }
+// checks if the entered invitation code exists in the database
 function invCodeExists($conn, $invCode)
 {
     $invCodeExists = false;
@@ -34,6 +37,7 @@ function invCodeExists($conn, $invCode)
     mysqli_stmt_close($stmt);
     return $invCodeExists;
 }
+// checks if the entered invitation code is already used to make another account
 function usedInvCode($conn, $invCode)
 {
     $usedInvCode = false;
@@ -55,6 +59,7 @@ function usedInvCode($conn, $invCode)
     mysqli_stmt_close($stmt);
     return $usedInvCode;
 }
+// queries when the entered invitation code was created from the database
 function invCodeCreationTime($conn, $invCode)
 {
     $sql = "SELECT invitationCodesCreationTime FROM invitationCodes WHERE invitationCodesID = ?;";
@@ -79,6 +84,7 @@ function invCodeCreationTime($conn, $invCode)
     mysqli_stmt_close($stmt);
     return $creationTime;
 }
+// checks if the entered invitation code was created within 24 hours
 function expiredInvCode($conn, $creationTime)
 {
     $now = time();
@@ -90,11 +96,13 @@ function expiredInvCode($conn, $creationTime)
     }
     return true;
 }
+// redirects the user to create an account 
 function validInvCode($invCode)
 {
     header("location: ../createAccount.php?invCode=" . $invCode);
     exit();
 }
+//checks if user input is empty
 function emptyInputSignup($uid, $pwd, $rePwd, $invCode)
 {
     return empty($uid) || empty($pwd) || empty($rePwd) || empty($invCode);
@@ -128,6 +136,7 @@ function uidExists($conn, $uid, $isLogin)
     }
     return false;
 }
+// checks if password and confirm password matches
 function pwdMatch($pwd, $rePwd)
 {
     return $pwd === $rePwd;
@@ -151,10 +160,13 @@ function createUser($conn, $uid, $pwd, $invCode)
     header("location: ../createAccount.php?error=none");
     exit();
 }
+//checks if user input is empty
 function emptyInputLogin($uid, $pwd)
 {
     return empty($uid) || empty($pwd);
 }
+// checks if username exists, then checks if the username and password matches
+// if both are true, creates $_SESSION variables
 function loginUser($conn, $uid, $pwd)
 {
     $uidExists = uidExists($conn, $uid, true);
@@ -182,6 +194,7 @@ function loginUser($conn, $uid, $pwd)
         exit();
     }
 }
+//checks if user input is empty
 function emptyInputClubPage($id, $title)
 {
     return empty($id) || empty($title);
@@ -191,12 +204,12 @@ function updateClubPage($conn, $id, $title, $description, $contact)
     $sql = "UPDATE clubs SET clubsTitle=?, clubsDescription=?, clubsContactInfo=? WHERE clubsID=?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=stmtfailed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=stmtfailed#basicInfo");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "sssi", $title, $description, $contact, $id);
     if (!mysqli_stmt_execute($stmt)) {
-        header("location: ../clubPageUser.php?club=" . $id . "&error=exefailed");
+        header("location: ../clubPageUser.php?club=" . $id . "&error=exefailed#basicInfo");
         exit();
     };
     mysqli_stmt_close($stmt);
@@ -343,6 +356,7 @@ function deleteMember($conn, $memberID, $clubID)
     header("location: ../clubPageUser.php?club=" . $clubID . "&error=none3#suggestionAndMember");
     exit();
 }
+// checks if the username and password matches
 function verifyPwd($conn, $uid, $pwd)
 {
     $uidExists = uidExists($conn, $uid, false);
@@ -357,18 +371,19 @@ function verifyPwd($conn, $uid, $pwd)
     }
     return false;
 }
+// updates the password linked to the username in the database
 function changePwd($conn, $uid, $newPwd)
 {
     $sql = "UPDATE users SET usersPwd = ? WHERE usersUid = ?;";
     $hashedPwd = password_hash($newPwd, PASSWORD_DEFAULT);
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../changePwd.php?error=stmt7failed#media");
+        header("location: ../changePwd.php?error=stmt7failed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss", $hashedPwd, $uid);
     if (!mysqli_stmt_execute($stmt)) {
-        header("location: ../changePwd.php?error=exe7failed#media");
+        header("location: ../changePwd.php?error=exe7failed");
         exit();
     };
     mysqli_stmt_close($stmt);
