@@ -6,9 +6,9 @@
         global $clubName;
         global $contact;
         global $description;
-        $clubName = $_POST['clubName'];                                
-        $contact= $_POST['contact'];
-        $description= $_POST['description'];
+        $clubName = trim($_POST['clubName']);
+        $contact= trim($_POST['contact']);
+        $description= trim($_POST['description']);
         
         $sql_query = "SELECT clubsTitle FROM clubs WHERE clubsTitle='$clubName'";
         $record = mysqli_query($conn, $sql_query);
