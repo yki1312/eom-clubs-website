@@ -17,16 +17,25 @@
         $record = mysqli_query($conn, $sql_club_query);
         $row = mysqli_fetch_array($record);
             
-        $sql = "INSERT INTO clubsuggestions (clubSuggestionsContent, clubSuggestionsClub) VALUES ('$comments', '$row[clubsID]')";                    
-        if(mysqli_query($conn, $sql)){
-            header("location: ../suggestions.php?error=none");
+        $sql = "INSERT INTO clubsuggestions (clubSuggestionsContent, clubSuggestionsClub) VALUES (?, ?)";                    
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("location: ../suggestions.php?error=sqlStmtFailed");
             exit();
-        } else{
-            echo "There was an error inputting the code";
         }
-} else {
-    header("location: ../suggestions.php?error=emptyclub");
-    exit();
-}
+        mysqli_stmt_bind_param($stmt, "si", $comments, $row["clubsID"]);
+        if (!mysqli_stmt_execute($stmt)) {
+            header("location: ../suggestions.php?error=sqlExecFailed");    
+            exit();  
+        };
+        mysqli_stmt_close($stmt);
+        
+        header("location: ../suggestions.php?error=none");
+        exit();
+        
+    } else {
+        header("location: ../suggestions.php?error=emptyclub");
+        exit();
+    }
     $conn->close();
 ?>

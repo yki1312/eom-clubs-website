@@ -1,10 +1,29 @@
 <?php include_once 'header.php'?>
 
+<!-- This is a different type of error handling. -->
+<?php
+  if (isset($_GET["error"])) {
+    switch ($_GET["error"]) {
+      case "none":
+        echo "<br><p class='container'><font color=green>You've successfully added a club!</font> </p> ";
+        break;
+      case "clubExist":
+        echo "<br><p class='container'><font color=red>This club already exists. Please try a different name!</font> </p> ";
+        break;
+      case "sqlStmtFailed":
+      case "sqlExecFailed":
+        echo "<br><p class='container'><font color=red>Sql Execution failed!</font> </p> ";
+        break;
+
+    }
+  }
+?>
+
 <!-- addClub.php is where the users can create a new club. They have to enter the 
 club's name, contact information and description. There is a limit to the number of character length to 
-avoid crashes or confusion. -->
+avoid confusion. -->
 
-<!-- This is also where I have added the error handling by using the required keyword. This keyword
+<!-- Error handling is also included by using the required keyword in each section of the form. This keyword
 restricts the user from going ahead if they haven't entered the previous information. -->
 <div class="container">
   <h2>Add a Club Form</h2>
@@ -26,19 +45,7 @@ restricts the user from going ahead if they haven't entered the previous informa
   </section>
 </div>
 
-<?php
-if (isset($_GET["error"])) {
-  switch ($_GET["error"]) {
-    case "none":
-      echo "<br><p class='container'><font color=green>You've successfully added a club!</font> </p> ";
-      break;
-    case "clubExist":
-      echo "<br><p class='container'><font color=red>This club already exists. Please try a different name!</font> </p> ";
-      break;
-  }
-}
 
-?>
 
 <br>
 <br>

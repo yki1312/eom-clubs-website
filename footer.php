@@ -7,24 +7,24 @@
                         Phone (613) 592-3361 | Fax (613) 592-9501 <br>
                         <a href="mailto:earlofmarchss@ocdsb.ca">Email: earlofmarchss@ocdsb.ca</a>
                     
-            <div style="display:flex;justify-content:flex-end;margin-top:auto;">
+            <!--<div style="display:flex;justify-content:flex-end;margin-top:auto;">
             
                 <img id="myImg" src="img/Earl.png" alt="Earl of March Secondary School"  style="width:100%;max-width:300px">
                 
-                <!-- The Modal -->
+                 The Modal 
                 <div id="myModal" class="modal">
-                    <!-- The Close Button -->
+                    The Close Button 
                     <span class="close">&times;</span>
 
-                    <!-- Modal Content (The Image) -->
+                    Modal Content (The Image) 
                     <img class="modal-content" id="img01">
 
-                    <!-- Modal Caption (Image Text) -->
+                    Modal Caption (Image Text) 
                     <div id="caption"></div>
                 </div>
 
-                <!-- This code block is executing the how to convert the image inside the model. 
-                It also untilizes the alt text as the caption of the image. -->
+                This code block is executing the how to convert the image inside the model. 
+                It also untilizes the alt text as the caption of the image. 
                 <script>
                     // Get the modal
                     var modal = document.getElementById("myModal");
@@ -47,7 +47,7 @@
                     modal.style.display = "none";
                     }
                 </script>
-            </div>
+            </div>-->
             </address>
             
         </footer>

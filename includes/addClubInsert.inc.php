@@ -10,18 +10,26 @@
         $contact= trim($_POST['contact']);
         $description= trim($_POST['description']);
         
+        // Checking if the club previously exists or not by searching for the club name 
+        // in the database. If it does then there will be an error displayed that the club already exists.
         $sql_query = "SELECT clubsTitle FROM clubs WHERE clubsTitle='$clubName'";
         $record = mysqli_query($conn, $sql_query);
         
         if (mysqli_num_rows($record) == 0) {
-            $sql = "INSERT INTO clubs (clubsTitle, clubsDescription, clubsContactInfo) VALUES ('$clubName', '$description', '$contact')";
-            if(mysqli_query($conn, $sql)){
-                header("location: ../addClub.php?error=none");    
-                exit();    
-            } else {
-                echo "There was an error inserting the club.";
+            $sql = "INSERT INTO clubs (clubsTitle, clubsDescription, clubsContactInfo) VALUES (?, ?, ?)";
+            $stmt = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                header("location: ../addClub.php?error=sqlStmtFailed");
                 exit();
             }
+            mysqli_stmt_bind_param($stmt, "sss", $clubName, $description, $contact);
+            if (!mysqli_stmt_execute($stmt)) {
+                header("location: ../addClub.php?error=sqlExecFailed");    
+                exit();  
+            };
+            mysqli_stmt_close($stmt);
+            header("location: ../addClub.php?error=none");    
+            exit();                
         } else {
             header("location: ../addClub.php?error=clubExist");
             exit();

@@ -3,9 +3,8 @@
         <br>
         <h2>Your Profile</h2>
         <br>
-    <!-- This is the user profile page where first I have searched for the invitation codes and the
-    corresponding account types for the user who is logged in. 
-    This information is needed to display to the user logged in.-->
+    <!-- Searched for the invitation codes and the corresponding account types for the user who is logged in. 
+    This information is needed to display information of the user.-->
     <?php
         $record = mysqli_query($conn,"SELECT usersInvCode FROM users WHERE usersId = {$_SESSION["userId"]}");
         if (mysqli_num_rows($record) == 1) {
@@ -17,8 +16,8 @@
         } 
     ?>
     
-        <!-- This is the actual form of where the user sees its infomation displayed of its
-        username, and their account type. -->
+        <!-- This is the actual form of where the user sees its infomation displayed, its
+        username, and their account type. These are read-only fields. -->
         <div class="container">
         <form> 
             <fieldset>

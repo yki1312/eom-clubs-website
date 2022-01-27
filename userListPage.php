@@ -10,6 +10,8 @@
     <br>
     <br>
 
+    <!-- Using a select query to fetch data from the databse and then displaying it in an 
+    HTML table.-->
     <table table id="userTable">
         <tr>
             <th width="40%">Username</th>
@@ -17,13 +19,17 @@
         </tr>
     
         <?php
-        $records = mysqli_query($conn,"SELECT usersID, usersUid FROM users"); // fetch data from database
+        // fetch data of users from database
+        $records = mysqli_query($conn,"SELECT usersID, usersUid FROM users"); 
         while($data = mysqli_fetch_array($records)) {
             if($data['usersUid'] != $_SESSION["userUid"]) {
         ?>
 
         <tr>
+            <!-- There are two types of account one is teacher and one is student. Both accounts
+        can view and search users. While teachers can delete and make new invitation codes. -->
             <td><?php echo $data['usersUid']; ?></td>
+            <!-- Checking whether the user is a student or a teacher. -->
             <?php 
                 if ($_SESSION["userRole"] == "Student") {
                 echo "<td>----</td>";
@@ -31,7 +37,7 @@
             ?>
 
             <?php 
-                if ($_SESSION["userRole"] == "teacher") {
+                if ($_SESSION["userRole"] == "Teacher") {
                     echo "<td><a href=\"includes/deleteUser.inc.php?id=" . $data["usersID"] . "\">Delete</a></td>";
                 }
             ?>
@@ -44,6 +50,7 @@
     </div>
     
     <?php
+        // This is where the error handling takes place. 
         if (isset($_GET["error"])) {
             switch ($_GET["error"]) {
                 case "errorUserDelete":
@@ -55,15 +62,12 @@
         }
     ?>
     
+    
+    <br>
+    <br>
+
+
     <!--Created a search for the user list page.-->
-    <br>
-    <br>
-
-    <!--<form class="userSearch">
-        <input type="text" name="search" onkeyup="searchFunction()" id="myInput" placeholder="Search user...">
-    </form>
-    <br>-->
-
     <form action="searchUser.php" method="POST" class="userSearch">
         <div class="row">
             <input type="text" name="search" class="form-control" placeholder="Search user..." ></input><br>
@@ -71,33 +75,10 @@
         </div>
     </form>
 
-    <!--<script>
-        function searchFunction() {
-            // Declare variables
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("userTable");
-            tr = table.getElementsByTagName("tr");
-        
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1]; //I needed to search from the second row User Email! It was set to the first.
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-                } else {
-                tr[i].style.display = "none";
-                }
-            }
-            }
-        }
-    </script>-->
-
     
+    <!-- Only teachers can create new invitation codes -> which means new account. -->
     <?php
-        if ($_SESSION["userRole"] == "teacher") {
+        if ($_SESSION["userRole"] == "Teacher") {
             echo "<a href=\"createInvitationCode.php\"><input type=\"button\" value=\"Create Invitation Code\" class=\"addClub\"></a>";
         }
     ?>
