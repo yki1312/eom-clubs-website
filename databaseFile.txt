@@ -35,7 +35,8 @@ CREATE TABLE invitationCodes (
     invitationCodesAccountType VARCHAR(7) DEFAULT 'student',
     PRIMARY KEY (invitationCodesID)
 );
-
+ 
+INSERT INTO invitationCodes(invitationCodesID, invitationCodesAccountType) VALUES (908766, 'teacher'); 
 
 
 CREATE TABLE users (

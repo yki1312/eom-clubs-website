@@ -1,6 +1,6 @@
 <?php include_once 'header.php'?>
 
-<!-- This is a different type of error handling. -->
+<!-- This is a another type of error handling used in addClub.php. -->
 <?php
   if (isset($_GET["error"])) {
     switch ($_GET["error"]) {

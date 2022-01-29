@@ -10,6 +10,7 @@ ICS4U term project by Ambika and Yuki.
     
     Run: Then after setting it up you can run the XAMPP to see how it works. Start your browser and type http://127.0.0.1 or http://localhost in the location bar. You should see our pre-made start page with certain examples and test screens.
 
+
     b) MySQL - Version 8.0
     Download and Installation Link for Windows: https://dev.mysql.com/downloads/installer/   
     Configure: You can configure and update your settings in the "db.inc.php" file. 
@@ -25,10 +26,9 @@ ICS4U term project by Ambika and Yuki.
 
 3. SQL Database Creation for Website
     Run databaseFile.txt in MySQl Workbench application to load the database tables - This step is a one time setup.
-    The database is not synced because it runs on our local computer - localhost.
-    But you can test the features and then but just note that the database may not be the same.
 
-4. Create First Invitation code in the database?
+4. Setting up the first account on the website. 
+    We would already add a line of insert query in the databaseFile.txt file under the invitation codes table, so that when the file runs, the code is added in the database itself. Then the user can use this code to create an account on the website. 
 
 5. Access the EOM Club website main page
    URL: http://localhost:8080/EOM_WEBSITE/eom-clubs-2/main_page.php 

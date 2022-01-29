@@ -7,7 +7,7 @@
         $inv_code = $_REQUEST["code"];              
         $type= $_REQUEST["type"];
 
-        // Checking to see if the code exists or not.
+        // Checking to see if the code previously exists or not.
         $sql_club_query = "SELECT invitationCodesID FROM InvitationCodes WHERE invitationCodesID='$inv_code'";
         $record = mysqli_query($conn, $sql_club_query);
         
@@ -15,8 +15,9 @@
             echo json_encode(['success' => false]);
             exit();
         }
-        // Here we are inserting the invitation code. And also checking whether the query is 
-        // excecuted or gives an error.
+        /* If the code doesn't exist we can more ahead and insert the invitation code. 
+        Also checking whether the query is excecuted or gives an error.
+        */
         $sql = "INSERT INTO InvitationCodes (invitationCodesID, invitationCodesAccountType) VALUES ('$inv_code', '$type')";                    
         if(mysqli_query($conn, $sql)){
             echo json_encode(['success' => true]);

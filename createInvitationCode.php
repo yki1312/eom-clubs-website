@@ -1,6 +1,6 @@
 <?php include_once 'header.php'?>
 
-<!--This is the actual form where I ask the users who are TEACHERS to generate a new invitation code. -->
+<!--This page is only acessible to Teachers. They can create new invitation codes. -->
 <div id="main_layout">
     <center>
         <h2>Create Invitation Code Page</h2>
@@ -13,7 +13,7 @@
             <input type="radio" id="teacher" name="acc_ty" value="Teacher" checked>
             <label for="teacher">Teacher</label><br>
         </form>
-        <!--Created a button which would output a random number and display on the screen-->
+        <!--Created a button using JS which would output a random number and display on the screen-->
         <button type="button" onclick="randomCode()">Generate Invitation Code</button>
         <strong><p id="new_code"></p></strong>
         <strong><p id="result"></p></strong>
@@ -44,8 +44,9 @@ database.-->
             }
         }
         
-        // Here is the method we use to communicate to PHP using PHP AJAX functionality. 
-        // We create a an XMLHttpRequest object and us conditions to verify what we have received. 
+        /* Here is the method we use to communicate to PHP using PHP AJAX functionality. 
+        We create a an XMLHttpRequest object and use conditions to verify what we have received. 
+        */
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -57,8 +58,9 @@ database.-->
                 }
             }
         };
-        // Here is where we specify what method to send the request, where to send the request and what 
-        // would the content be.
+        /* Here is where we specify what method to send the request, where to send the request and what 
+        would the content be.
+        */
         xhttp.open("GET", "includes/InsertInvCodeInDB.inc.php?code="+code+"&type="+result);
         xhttp.send();
     }

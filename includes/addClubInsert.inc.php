@@ -10,11 +10,15 @@
         $contact= trim($_POST['contact']);
         $description= trim($_POST['description']);
         
-        // Checking if the club previously exists or not by searching for the club name 
-        // in the database. If it does then there will be an error displayed that the club already exists.
+        /* Checking if the club previously exists or not by searching for the club name 
+        in the database. If it does then there will be an error displayed that the club already exists.
+        */
         $sql_query = "SELECT clubsTitle FROM clubs WHERE clubsTitle='$clubName'";
         $record = mysqli_query($conn, $sql_query);
         
+        /* Here also we need to use prepared statements to allow the use of        
+        exceptions like " or ' or !. Else the suggestion would not be entered in the database.
+        */
         if (mysqli_num_rows($record) == 0) {
             $sql = "INSERT INTO clubs (clubsTitle, clubsDescription, clubsContactInfo) VALUES (?, ?, ?)";
             $stmt = mysqli_stmt_init($conn);

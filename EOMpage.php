@@ -1,6 +1,7 @@
 <?php include_once 'header.php'; ?>
 
     <div class="container">
+        <!-- This is where it explains some of the goals of the website.-->
         <section class="flex-container-h">
             <div class="flex-container-v" style="flex-grow: 1;">
                 <h1 style="font-size: xx-large;">EARL OF MARCH CLUBS</h1>
@@ -10,7 +11,7 @@
             </div>
 
 
-            <!-- This is the code used to create a model image for the school's photo. 
+            <!-- This is the code used to create a modal image for the school's photo. 
             A modal is a dialog box/popup window that is displayed on top of the current page. 
             This code is inspired from W3 Schools. -->    
             <div style="flex-grow: 1;">
@@ -28,7 +29,7 @@
                     <div id="caption"></div>
                 </div>
 
-                <!-- This code block is executing the how to convert the image inside the model. 
+                <!-- This code block is executing the how to convert the image inside the modal. 
                 It also untilizes the alt text as the caption of the image. -->
                 <script>
                     // Get the modal
@@ -53,6 +54,9 @@
                     }
                 </script>
 
+
+
+                <!-- This is another image included on this page. The work done is similar to the first.-->
                 <img id="myImg1" src="img/earl_photo.png" alt="Earl of March Logo"  style="width:100%;max-width:300px">
 
                 <!-- The Modal -->
